@@ -4,8 +4,7 @@
         <div class="max-w-sm mx-auto md:max-w-lg">
             <div class="w-full">
                 <a href="#" class="flex justify-center items-center mb-6 text-2xl font-semibold text-gray-900 dark:text-white">
-                    <img class="w-8 h-8 mr-2" src="https://flowbite.s3.amazonaws.com/blocks/marketing-ui/logo.svg" alt="logo">
-                    Flowbite    
+                    <img class="w-32 h-auto" src="@/assets/logo.png" alt="logo"> 
                 </a>
                 <div class="bg-white rounded shadow dark:border h-64 py-3 text-center">
                       <h1 class="text-2xl font-bold">Verifikasi OTP</h1>
