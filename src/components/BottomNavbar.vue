@@ -11,7 +11,7 @@
             <span class="text-xs md:text-sm text-gray-500 dark:text-gray-400 group-hover:text-blue-600 dark:group-hover:text-blue-500">Beranda</span>
         </button>
         <button @click="showNotification"  type="button" class="notif-dropdown-bottom relative inline-flex flex-col items-center justify-center px-5 hover:bg-gray-50 dark:hover:bg-gray-800 group">
-            <svg class="w-7 h-7 text-gray-500 dark:text-gray-400 hover:text-blue-600 dark:group-hover:text-blue-500"  viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg"><g id="SVGRepo_bgCarrier" stroke-width="0"></g><g id="SVGRepo_tracerCarrier" stroke-linecap="round" stroke-linejoin="round"></g><g id="SVGRepo_iconCarrier"> <path opacity="0.4" d="M19.3399 14.4899L18.3399 12.8299C18.1299 12.4599 17.9399 11.7599 17.9399 11.3499V8.8199C17.9399 5.5599 15.2899 2.8999 12.0199 2.8999C8.74994 2.8999 6.09994 5.5599 6.09994 8.8199V11.3499C6.09994 11.7599 5.90994 12.4599 5.69994 12.8199L4.68994 14.4899C4.28994 15.1599 4.19994 15.8999 4.44994 16.5799C4.68994 17.2499 5.25994 17.7699 5.99994 18.0199C7.93994 18.6799 9.97994 18.9999 12.0199 18.9999C14.0599 18.9999 16.0999 18.6799 18.0399 18.0299C18.7399 17.7999 19.2799 17.2699 19.5399 16.5799C19.7999 15.8899 19.7299 15.1299 19.3399 14.4899Z" fill="#292D32"></path> <path d="M14.2508 3.32C13.5608 3.05 12.8108 2.9 12.0208 2.9C11.2408 2.9 10.4908 3.04 9.80078 3.32C10.2308 2.51 11.0808 2 12.0208 2C12.9708 2 13.8108 2.51 14.2508 3.32Z" fill="#292D32"></path> <path d="M14.8297 20.01C14.4097 21.17 13.2997 22 11.9997 22C11.2097 22 10.4297 21.68 9.87969 21.11C9.55969 20.81 9.31969 20.41 9.17969 20C9.30969 20.02 9.43969 20.03 9.57969 20.05C9.80969 20.08 10.0497 20.11 10.2897 20.13C10.8597 20.18 11.4397 20.21 12.0197 20.21C12.5897 20.21 13.1597 20.18 13.7197 20.13C13.9297 20.11 14.1397 20.1 14.3397 20.07C14.4997 20.05 14.6597 20.03 14.8297 20.01Z" fill="#292D32"></path> </g></svg>
+            <svg class="w-7 h-7 text-gray-500 dark:text-gray-400 hover:text-blue-600 dark:group-hover:text-blue-500"  viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg"><g id="SVGRepo_bgCarrier" stroke-width="0"></g><g id="SVGRepo_tracerCarrier" stroke-linecap="round" stroke-linejoin="round"></g><g id="SVGRepo_iconCarrier"> <path opacity="0.4" d="M19.3399 14.4899L18.3399 12.8299C18.1299 12.4599 17.9399 11.7599 17.9399 11.3499V8.8199C17.9399 5.5599 15.2899 2.8999 12.0199 2.8999C8.74994 2.8999 6.09994 5.5599 6.09994 8.8199V11.3499C6.09994 11.7599 5.90994 12.4599 5.69994 12.8199L4.68994 14.4899C4.28994 15.1599 4.19994 15.8999 4.44994 16.5799C4.68994 17.2499 5.25994 17.7699 5.99994 18.0199C7.93994 18.6799 9.97994 18.9999 12.0199 18.9999C14.0599 18.9999 16.0999 18.6799 18.0399 18.0299C18.7399 17.7999 19.2799 17.2699 19.5399 16.5799C19.7999 15.8899 19.7299 15.1299 19.3399 14.4899Z" fill="currentColor"></path> <path d="M14.2508 3.32C13.5608 3.05 12.8108 2.9 12.0208 2.9C11.2408 2.9 10.4908 3.04 9.80078 3.32C10.2308 2.51 11.0808 2 12.0208 2C12.9708 2 13.8108 2.51 14.2508 3.32Z" fill="currentColor"></path> <path d="M14.8297 20.01C14.4097 21.17 13.2997 22 11.9997 22C11.2097 22 10.4297 21.68 9.87969 21.11C9.55969 20.81 9.31969 20.41 9.17969 20C9.30969 20.02 9.43969 20.03 9.57969 20.05C9.80969 20.08 10.0497 20.11 10.2897 20.13C10.8597 20.18 11.4397 20.21 12.0197 20.21C12.5897 20.21 13.1597 20.18 13.7197 20.13C13.9297 20.11 14.1397 20.1 14.3397 20.07C14.4997 20.05 14.6597 20.03 14.8297 20.01Z" fill="currentColor"></path> </g></svg>
             <span class="text-xs md:text-sm text-gray-500 dark:text-gray-400 group-hover:text-blue-600 dark:group-hover:text-blue-500">Notifikasi</span>
             <span v-if="userAuth.notification.total_notification > 0" class="absolute bg-red-500 rounded-full top-2 md:top-0 left-1/2 w-4 h-4 text-white font-semibold text-center text-[8px]">
              {{ userAuth.notification.total_notification}}
@@ -24,7 +24,7 @@
             <button class="text-xs md:text-sm text-gray-500 dark:text-gray-400 group-hover:text-blue-600 dark:group-hover:text-blue-500">User Login</button>
 
             <BaseModal :modalActive="modalActive" @close-modal="toggleModal">
-              <div class="px-4 py-4">
+              <div class="px-4 py-4 bg-white rounded-lg">
                 <div class="w-full h-16">
                     <span class="text-lg text-black">Pengguna login saat ini</span>
                 </div>
@@ -34,7 +34,7 @@
                     <div class="relative">
                         <img class="w-14 h-14 rounded-full" :src="user.foto_profile" :alt="user.username" v-if="user.foto_profile">
                         <img class="w-14 h-14 rounded-full" v-else src="@/assets/clown.jpg" alt="clown">
-                        <span class="top-0 left-10 absolute  w-4 h-4 bg-green-400 border-2 border-white dark:border-gray-800 rounded-full"></span>
+                        <span class="top-0 left-10 absolute  w-4 h-4 bg-green-400 border-2 border-white rounded-full"></span>
                     </div>
                     <div class="ms-4">
                         <RouterLink @click="closeModal" :to="'/profile/' + user.username" class="">
