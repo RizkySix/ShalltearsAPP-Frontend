@@ -103,6 +103,7 @@
 
   import LoadedV2 from "@/components/LoadedV2.vue";
   import NotificationDropdown from "@/components/NotificationDropdown.vue";
+import http from "../helper/http";
   
   const userAuth = useUserAuthStore()
   const currentUser = reactive({
@@ -123,7 +124,7 @@
      if(userAuth.notification.notification_list){
 
         //update readed notif
-        axios.put('http://shalltears-app.test/api/v1/notification/readed' , {readed_notif: JSON.parse(userAuth.notification.notification_list).length} , {
+        http().put('/api/v1/notification/readed' , {readed_notif: JSON.parse(userAuth.notification.notification_list).length} , {
           headers: {
             Authorization: 'Bearer ' + localStorage.getItem('token')
           }
@@ -142,7 +143,7 @@
   /* fetch user */
   const fetchUser = () => {
     
-    axios.get('http://shalltears-app.test/api/v1/personal-user' , {
+    http().get('/api/v1/personal-user' , {
     headers: {
       Authorization: 'Bearer ' + localStorage.getItem('token')
     }
@@ -215,7 +216,7 @@ const handleClickOutside = (event) => {
  
     // Membuat timeout baru yang akan menjalankan permintaan setelah pengguna berhenti mengetik selama 300ms
     timeoutId = setTimeout(async () => {
-     await axios.get('http://shalltears-app.test/api/v1/find-user?user_keyword=' + keyword, {
+     await http().get('/api/v1/find-user?user_keyword=' + keyword, {
         headers: {
           Authorization: 'Bearer ' + localStorage.getItem('token')
         }
@@ -236,7 +237,7 @@ const handleClickOutside = (event) => {
 
   /* Logout */
   const handleLogout = () => {
-    axios.post('http://shalltears-app.test/api/v1/logout' , {} , {
+    http().post('/api/v1/logout' , {} , {
     headers: {
       Authorization: 'Bearer ' + localStorage.getItem('token')
     }

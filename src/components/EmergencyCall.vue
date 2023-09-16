@@ -32,6 +32,7 @@
 import axios from 'axios';
 import { onMounted, reactive, ref } from 'vue';
 import { useUserAuthStore } from "@/stores/authUser";
+import http from '../helper/http';
 
 const emergencyData = reactive({
     message: '',
@@ -55,7 +56,7 @@ const handleEmergency = () => {
         return false
     }
 
-    axios.post('http://shalltears-app.test/api/v1/emergency-mail' , emergencyData , {
+    http().post('/api/v1/emergency-mail' , emergencyData , {
         headers: {
             Authorization: 'Bearer ' + localStorage.getItem('token')
         }
@@ -73,7 +74,7 @@ const handleEmergency = () => {
 
 //cek access emergency call
 const checkLimit = () => {
-    axios.get('http://shalltears-app.test/api/v1/emergency-mail/limit' ,{
+    http().get('/api/v1/emergency-mail/limit' ,{
         headers: {
             Authorization: 'Bearer ' + localStorage.getItem('token')
         }

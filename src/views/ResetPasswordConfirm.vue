@@ -158,6 +158,7 @@ import { useRoute } from 'vue-router';
 
 import Loaded from "@/components/Loaded.vue";
 import axios from 'axios';
+import http from '../helper/http';
 
 
 const route = useRoute()
@@ -169,7 +170,7 @@ const handleStoreResetPassword = () => {
   
    try {
     const decodedEmail = atob(route.params.email);
-    axios.post('http://shalltears-app.test/api/v1/reset-password/' + route.params.reset_password_token + '/' + decodedEmail)
+    http().post('/api/v1/reset-password/' + route.params.reset_password_token + '/' + decodedEmail)
         .then((response) => {
             isReset.value = true
             result.value = true

@@ -237,6 +237,7 @@ import { useAlbumStore } from '@/stores/album.js'
 import { limitCharacterCount } from '@/assets/js/limit-char-comment.js'
 
 import axios from "axios";
+import http from "../helper/http";
 
 const props = defineProps({
   foto_profile: String,
@@ -262,11 +263,11 @@ const toggleModal = () => {
 
 const checkRoute = () => {
   if(route.name === 'profile'){
-    getAlbumEndpoint.value = 'http://shalltears-app.test/api/v1/user/albums/'
-    singlePostEndpoint.value = 'http://shalltears-app.test/api/v1/post/'
+    getAlbumEndpoint.value = http() + '/api/v1/user/albums/'
+    singlePostEndpoint.value = http() + '/api/v1/post/'
   }else if(route.name === 'archive.album'){
-    getAlbumEndpoint.value = 'http://shalltears-app.test/api/v1/user/albums/archived/'
-    singlePostEndpoint.value = 'http://shalltears-app.test/api/v1/post/archived/'
+    getAlbumEndpoint.value = http() + '/api/v1/user/albums/archived/'
+    singlePostEndpoint.value = http() + '/api/v1/post/archived/'
   }
 }
 
@@ -361,7 +362,7 @@ const popupAlbum = (uuid) => {
 const allComment = ref([])
 
 const getComment = (postId) => {
-  axios.get('http://shalltears-app.test/api/v1/post/comments/' + postId , {
+  http().get('/api/v1/post/comments/' + postId , {
     headers: {
           Authorization: 'Bearer ' + localStorage.getItem('token')
       }
@@ -394,14 +395,14 @@ const subCommentText = reactive({
 
 const handleComment = () => {
 
-    let endpoint = 'http://shalltears-app.test/api/v1/comment'
+    let endpoint = http() + '/api/v1/comment'
     let params = commentText
 
     //logic apakah kirim comentar atu balas comentar
     if(subCommentText.comment_id == null){
       commentText.post_id = detailPost.post_id
     }else{
-      endpoint = 'http://shalltears-app.test/api/v1/sub-comment'
+      endpoint = http() + '/api/v1/sub-comment'
       subCommentText.sub_comment = commentText.comment
       params = subCommentText
     }
@@ -474,7 +475,7 @@ const toggleBalasan = (comment_id) => {
 }
 
 const deleteComment = (comment_id) => {
-    axios.delete('http://shalltears-app.test/api/v1/comment/' + comment_id , {
+    http().delete('/api/v1/comment/' + comment_id , {
       headers: {
             Authorization: 'Bearer ' + localStorage.getItem('token')
         }
@@ -489,7 +490,7 @@ const deleteComment = (comment_id) => {
 }
 
 const deleteSubComment = (sub_comment_id) => {
-    axios.delete('http://shalltears-app.test/api/v1/sub-comment/' + sub_comment_id , {
+    http().delete('/api/v1/sub-comment/' + sub_comment_id , {
       headers: {
             Authorization: 'Bearer ' + localStorage.getItem('token')
         }
@@ -513,7 +514,7 @@ const likePost = () => {
     return false
   }
 
-  axios.put('http://shalltears-app.test/api/v1/like/' + detailPost.uuid , {} , {
+  http().put('/api/v1/like/' + detailPost.uuid , {} , {
       headers: {
             Authorization: 'Bearer ' + localStorage.getItem('token')
         }

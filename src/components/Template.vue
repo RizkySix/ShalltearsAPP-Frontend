@@ -65,6 +65,7 @@
     import { reactive, onMounted } from "vue";
     import axios from 'axios';
     import { useRouter } from "vue-router";
+import http from "../helper/http";
   
     const currentUser = reactive({
         foto_profile: '',
@@ -73,7 +74,7 @@
     })
   
     const fetchUser = () => {
-      axios.get('http://shalltears-app.test/api/v1/personal-user' , {
+      http().get('/api/v1/personal-user' , {
       headers: {
         Authorization: 'Bearer ' + localStorage.getItem('token')
       }
@@ -96,7 +97,7 @@
   
     /* Logout */
     const handleLogout = () => {
-      axios.post('http://shalltears-app.test/api/v1/logout' , {} , {
+      http().post('/api/v1/logout' , {} , {
       headers: {
         Authorization: 'Bearer ' + localStorage.getItem('token')
       }

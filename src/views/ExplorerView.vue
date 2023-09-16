@@ -162,6 +162,7 @@ import { useAlbumStore } from '@/stores/album';
 
 import { onMounted, reactive, ref, watch } from "vue";
 import axios from "axios";
+import http from "../helper/http";
 
 const userAuth = useUserAuthStore();
 
@@ -221,7 +222,7 @@ const latestLikes = ref([])
 //like action
 const likePost = (uuid) => {
 
-axios.put('http://shalltears-app.test/api/v1/like/' + uuid , {} , {
+http().put('/api/v1/like/' + uuid , {} , {
     headers: {
           Authorization: 'Bearer ' + localStorage.getItem('token')
       }
@@ -242,7 +243,7 @@ const loginUser = ref([])
 const waitingResponse = ref(true)
  
 const getLoginUser = () => {
-     axios.get('http://shalltears-app.test/api/v1/login-user' , {
+     http().get('/api/v1/login-user' , {
         headers: {
             Authorization: 'Bearer ' + localStorage.getItem('token')
         }
@@ -260,7 +261,7 @@ const getLoginUser = () => {
 const contents = ref([])
 const lastPostId = ref(null)
 const fetchAllContents = () => {
-  axios.get('http://shalltears-app.test/api/v1/post' , {
+  http().get('/api/v1/post' , {
         headers: {
             Authorization: 'Bearer ' + localStorage.getItem('token')
         }
@@ -281,7 +282,7 @@ const fetchAllContents = () => {
 
 //expand content
 const expandContents = () => {
-  axios.get('http://shalltears-app.test/api/v1/post/expand?post_filter=' + lastPostId.value , {
+  http().get('/api/v1/post/expand?post_filter=' + lastPostId.value , {
         headers: {
             Authorization: 'Bearer ' + localStorage.getItem('token')
         }

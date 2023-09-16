@@ -43,6 +43,7 @@
 import { reactive, onMounted , ref } from "vue";
 import axios from "axios";
 import { useRouter } from 'vue-router';
+import http from "../helper/http";
 
 const credentials = reactive({
     user_mail: '',
@@ -52,7 +53,7 @@ const credentials = reactive({
 const router = useRouter()
 
 const handleLogin = () => {
-    axios.post('http://shalltears-app.test/api/v1/login' , credentials)
+    http().post('/api/v1/login' , credentials)
         .then((response) => {
            
             localStorage.setItem('token', response.data.token)

@@ -86,7 +86,7 @@
 import { reactive, ref } from 'vue';
 import { useRouter } from 'vue-router';
 import axios from 'axios';
-
+import http from '@/helper/http'
     
 const router = useRouter()
 
@@ -118,7 +118,7 @@ const validCharacter = (event) => {
 
 const handleRegister = () => {
   credentials.address = document.getElementById('address').value
-    axios.post('http://shalltears-app.test/api/v1/register' , credentials)
+    http().post('/api/v1/register' , credentials)
         .then((response) => {
 
             localStorage.setItem('token' , response.data.token)

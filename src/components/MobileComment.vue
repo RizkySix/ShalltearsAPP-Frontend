@@ -125,6 +125,7 @@ import { useRoute } from "vue-router";
 import { useCommentStore } from "@/stores/comment";
 import { useUserAuthStore } from '@/stores/authUser'
 import { limitCharacterCount } from '@/assets/js/limit-char-comment.js'
+import http from "../helper/http";
 
 const route = useRoute()
 
@@ -135,7 +136,7 @@ const allComment = ref([])
 const isFetched = ref(false)
 
 const getComment = (postId) => {
-  axios.get('http://shalltears-app.test/api/v1/post/comments/' + postId , {
+  http().get('/api/v1/post/comments/' + postId , {
     headers: {
           Authorization: 'Bearer ' + localStorage.getItem('token')
       }
@@ -169,14 +170,14 @@ const commentState = useCommentStore()
 
 const handleComment = () => {
     
-    let endpoint = 'http://shalltears-app.test/api/v1/comment'
+    let endpoint = '/api/v1/comment'
     let params = commentText
 
     //logic apakah kirim comentar atu balas comentar
     if(subCommentText.comment_id == null){
       commentText.post_id = props.detailPost.post_id
     }else{
-      endpoint = 'http://shalltears-app.test/api/v1/sub-comment'
+      endpoint = '/api/v1/sub-comment'
       subCommentText.sub_comment = commentText.comment
       params = subCommentText
     }
@@ -184,7 +185,7 @@ const handleComment = () => {
       //batasi agar maksimal karakter comment 65
       params.comment = params.comment.substring(0, 65);
       
-      axios.post(endpoint , params , 
+      http().post(endpoint , params , 
       {
       headers: {
             Authorization: 'Bearer ' + localStorage.getItem('token')
@@ -257,7 +258,7 @@ const toggleBalasan = (comment_id) => {
 }
 
 const deleteComment = (comment_id) => {
-    axios.delete('http://shalltears-app.test/api/v1/comment/' + comment_id , {
+    http().delete('/api/v1/comment/' + comment_id , {
       headers: {
             Authorization: 'Bearer ' + localStorage.getItem('token')
         }
@@ -277,7 +278,7 @@ const deleteComment = (comment_id) => {
 }
 
 const deleteSubComment = (sub_comment_id) => {
-    axios.delete('http://shalltears-app.test/api/v1/sub-comment/' + sub_comment_id , {
+    http().delete('/api/v1/sub-comment/' + sub_comment_id , {
       headers: {
             Authorization: 'Bearer ' + localStorage.getItem('token')
         }

@@ -27,6 +27,7 @@
 import { ref , onMounted } from 'vue';
 import axios from 'axios';
 import { useRoute } from 'vue-router';
+import http from '../helper/http';
 
 const props = defineProps({
     postId: Number
@@ -36,7 +37,7 @@ const route = useRoute()
 const likeList = ref([])
 const getLikes = (postId) => {
 
-    axios.get('http://shalltears-app.test/api/v1/post/likes/' + postId , {
+    http().get('/api/v1/post/likes/' + postId , {
         headers: {
             Authorization: 'Bearer ' + localStorage.getItem('token')
         }

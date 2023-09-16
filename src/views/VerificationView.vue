@@ -46,6 +46,7 @@ import { reactive , onMounted , computed , ref } from 'vue'
 import { otpSlider } from '@/assets/js/otp-slider.js'
 import axios from 'axios';
 import { useRouter } from 'vue-router';
+import http from '../helper/http';
 
 const router = useRouter()
 
@@ -63,7 +64,7 @@ const handleVerifyOtp = () => {
                  document.getElementById('fifth').value + 
                  document.getElementById('sixth').value
 
-  axios.post('http://shalltears-app.test/api/v1/verify-otp' , { otp_code: otpCode } , {
+  http().post('/api/v1/verify-otp' , { otp_code: otpCode } , {
     headers: {
         Authorization: 'Bearer ' + localStorage.getItem('token') 
     }
@@ -88,7 +89,7 @@ const handleVerifyOtp = () => {
 }
 
 const handleResendOtp = () => {
-    axios.post('http://shalltears-app.test/api/v1/resend-otp' , {} , {
+    http().post('/api/v1/resend-otp' , {} , {
     headers: {
         Authorization: 'Bearer ' + localStorage.getItem('token') 
     }

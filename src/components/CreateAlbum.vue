@@ -25,7 +25,7 @@
             :server="{
                 url: '',
                 process: {
-                    url: 'http://shalltears-app.test/api/v1/temp/album',
+                    url: 'https://shalltears.cloud/api/v1/temp/album',
                     method: 'POST',
                     onload: handleFilePondOnLoad,
                 },
@@ -67,6 +67,7 @@ import FilePondPluginImageCrop from "filepond-plugin-image-crop";
 
 
 import { useRoute, useRouter } from 'vue-router';
+import http from '../helper/http';
 
 const FilePond = vueFilePond(
   FilePondPluginFileValidateType,
@@ -97,7 +98,7 @@ const handleFilePondOnLoad = (response) => {
 const handleFilePondRevert = (uniqueID , load) => {
     myFiles.value = myFiles.value.filter((image) => image !== uniqueID)
     myFiles.value.length == 0 ? captDisabled.value = true : captDisabled.value = false
-    axios.delete('http://shalltears-app.test/api/v1/temp/album' , {
+    http().delete('/api/v1/temp/album' , {
         headers: {
          Authorization: 'Bearer ' + localStorage.getItem('token')
     },
@@ -120,7 +121,7 @@ const onUploadAction = (error , file) => {
 
 
 const allUploaded = () => {
-    axios.put('http://shalltears-app.test/api/v1/temp/album' , {album_contents: onUpload.value} , {
+    http().put('/api/v1/temp/album' , {album_contents: onUpload.value} , {
         headers: {
          Authorization: 'Bearer ' + localStorage.getItem('token')
     },
@@ -133,7 +134,7 @@ const allUploaded = () => {
     })
 }
 
-const urlCreateAlbum = ref('http://shalltears-app.test/api/v1/album')
+const urlCreateAlbum = ref('/api/v1/album')
 
 const reorder = (files, origin , target) => {
   
@@ -144,7 +145,7 @@ const reorder = (files, origin , target) => {
         )
     });
 
-   if(urlCreateAlbum.value != 'http://shalltears-app.test/api/v1/album?reorder=true'){
+   if(urlCreateAlbum.value != '/api/v1/album?reorder=true'){
         urlCreateAlbum.value = urlCreateAlbum.value + '?reorder=true'
    }
 
@@ -152,7 +153,7 @@ const reorder = (files, origin , target) => {
 
   
 const handleCreateAlbum = () => {
-  axios.post(urlCreateAlbum.value , {caption: caption.value , content: myFiles.value} , {
+  http().post(urlCreateAlbum.value , {caption: caption.value , content: myFiles.value} , {
     headers: {
          Authorization: 'Bearer ' + localStorage.getItem('token')
     },

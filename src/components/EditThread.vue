@@ -20,6 +20,7 @@ import axios from 'axios';
 import { ref } from 'vue';
 import { useRouter } from 'vue-router';
 import { useAlbumStore } from '@/stores/album.js'
+import http from '../helper/http';
 
 const props = defineProps({
     slug: String,
@@ -31,7 +32,7 @@ const router = useRouter()
 const albumActivity = useAlbumStore()
 
 const handleEditThread = (slug) => {
-    axios.put('http://shalltears-app.test/api/v1/thread/' + slug , {text: newThread.value} , {
+    http().put('/api/v1/thread/' + slug , {text: newThread.value} , {
         headers: {
          Authorization: 'Bearer ' + localStorage.getItem('token')
         },

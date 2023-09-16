@@ -80,6 +80,7 @@ import { onBeforeUnmount, onMounted, reactive, ref } from "vue";
 import axios from 'axios'
 import { useUserAuthStore } from '@/stores/authUser'
 import { useRouter } from "vue-router";
+import http from "../helper/http";
 
 const router = useRouter()
 
@@ -91,7 +92,7 @@ const waitingResponse = ref(true)
 const toggleModal = () => {
     modalActive.value = !modalActive.value
 
-     axios.get('http://shalltears-app.test/api/v1/login-user' , {
+     http().get('/api/v1/login-user' , {
         headers: {
             Authorization: 'Bearer ' + localStorage.getItem('token')
         }
@@ -124,7 +125,7 @@ const closeModal = () => {
      if(userAuth.notification.notification_list){
       
         //update readed notif
-        axios.put('http://shalltears-app.test/api/v1/notification/readed' , {readed_notif: JSON.parse(userAuth.notification.notification_list).length} , {
+        http().put('/api/v1/notification/readed' , {readed_notif: JSON.parse(userAuth.notification.notification_list).length} , {
           headers: {
             Authorization: 'Bearer ' + localStorage.getItem('token')
           }

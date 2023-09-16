@@ -71,6 +71,7 @@ import ThreadDropdown from "@/components/ThreadDropdown.vue";
 import axios from 'axios';
 import { useCommentStore } from '@/stores/comment';
 import { useAlbumStore } from '@/stores/album.js'
+import http from '../helper/http';
 
 
 const props = defineProps({
@@ -92,7 +93,7 @@ const toggleModal = () => {
 
 const threads = ref([])
 const getThread = (username) => {
-    axios.get('http://shalltears-app.test/api/v1/user/threads/' + username , {
+    http().get('/api/v1/user/threads/' + username , {
         headers: {
          Authorization: 'Bearer ' + localStorage.getItem('token')
         },
@@ -111,7 +112,7 @@ const latestLikes = ref([])
 //like action
 const likePost = (uuid) => {
 
-axios.put('http://shalltears-app.test/api/v1/like/' + uuid , {} , {
+http().put('/api/v1/like/' + uuid , {} , {
     headers: {
           Authorization: 'Bearer ' + localStorage.getItem('token')
       }

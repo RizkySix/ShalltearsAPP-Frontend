@@ -63,6 +63,7 @@ import { onMounted, ref } from 'vue';
 import { useUserAuthStore } from '@/stores/authUser'
 import { useRouter } from 'vue-router';
 import axios from 'axios';
+import http from '../helper/http';
 
 const props = defineProps({
     notificationDropdown: Boolean,
@@ -86,7 +87,7 @@ const redirectProfile = (message) => {
 
 //clear notif
 const handleClearNotif = () => {
-    axios.put('http://shalltears-app.test/api/v1/notification/readed/clear' , {} , {
+    http().put('/api/v1/notification/readed/clear' , {} , {
         headers: {
             Authorization: 'Bearer ' + localStorage.getItem('token')
             }
@@ -95,7 +96,7 @@ const handleClearNotif = () => {
             userAuth.notification.notification_list = null
         })
         .catch((error) => {
-            console.error(error)
+            //console.error(error)
         })
 }
 

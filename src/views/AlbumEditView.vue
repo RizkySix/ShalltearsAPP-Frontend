@@ -39,6 +39,7 @@
 
 <script setup>
 import axios from 'axios';
+import http from '@/helper/http'
 import { ref, onMounted } from 'vue'
 import { useRoute, useRouter } from 'vue-router';
 
@@ -55,7 +56,7 @@ const caption = ref('')
 const getContents = (slug) => {
     images.value = []
 
-    axios.get('http://shalltears-app.test/api/v1/album/' + slug , {
+    http().get('/api/v1/album/' + slug , {
         headers: {
             Authorization: 'Bearer ' + localStorage.getItem('token')
         }
@@ -75,7 +76,7 @@ const getContents = (slug) => {
 }
 
 const handleEditAlbum = () => {
-    axios.put('http://shalltears-app.test/api/v1/album/' + route.params.slug , {caption: caption.value} , {
+    http().put('/api/v1/album/' + route.params.slug , {caption: caption.value} , {
         headers: {
             Authorization: 'Bearer ' + localStorage.getItem('token')
         }

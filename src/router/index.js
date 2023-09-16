@@ -16,6 +16,7 @@ import TestMailView from '@/views/TestMailView.vue'
 
 import axios from 'axios'
 import { useUserAuthStore } from '@/stores/authUser'
+import http from '../helper/http'
 
 const router = createRouter({
   history: createWebHistory(import.meta.env.BASE_URL),
@@ -236,7 +237,7 @@ router.beforeEach((to,from) => {
 
 const checkTokenAuthentication = async() => {
   const userAuth = useUserAuthStore()
-  await axios.get('http://shalltears-app.test/api/v1/personal-user' , {
+  await http().get('/api/v1/personal-user' , {
     headers: {
       Authorization: 'Bearer ' + localStorage.getItem('token')
     }

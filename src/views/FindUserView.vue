@@ -60,6 +60,7 @@ import NotFoundView from "@/components/NotFoundView.vue";
 import axios from "axios";
 import { onMounted, ref, watch } from "vue";
 import { useRoute } from "vue-router";
+import http from "../helper/http";
 
 const route = useRoute()
 
@@ -69,7 +70,7 @@ const fetchProccess = ref(false)
 const fetchMatchUser = (keyword) => {
     matchUsers.value = []
     fetchProccess.value = false
-    axios.get('http://shalltears-app.test/api/v1/find-user?fetch_all=true&user_keyword=' + keyword , {
+    http().get('/api/v1/find-user?fetch_all=true&user_keyword=' + keyword , {
         headers: {
             Authorization: 'Bearer ' + localStorage.getItem('token')
         }

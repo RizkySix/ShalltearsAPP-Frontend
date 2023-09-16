@@ -100,6 +100,7 @@ import { onMounted, reactive, ref } from "vue";
 import axios from "axios";
 import { useRouter } from "vue-router";
 import { useUserAuthStore } from "@/stores/authUser";
+import http from "../helper/http";
 
 const router = useRouter()
 
@@ -111,7 +112,7 @@ const account = reactive({
 })
 
 const findAccountDetail = () => {
-     axios.get('http://shalltears-app.test/api/v1/user/account'  , {
+     http().get('/api/v1/user/account'  , {
           headers: {
             Authorization: 'Bearer ' + localStorage.getItem('token')
           }
@@ -139,7 +140,7 @@ const errorMsg = reactive({
 })
 
 const handleChangePassword = () => {
-    axios.put('http://shalltears-app.test/api/v1/reset-password' , payloadChangePassword  , {
+    http().put('/api/v1/reset-password' , payloadChangePassword  , {
           headers: {
             Authorization: 'Bearer ' + localStorage.getItem('token')
           }

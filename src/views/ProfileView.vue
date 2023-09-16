@@ -112,6 +112,7 @@ import { useRoute, useRouter } from "vue-router";
 import { useAlbumStore } from '@/stores/album.js'
 import { useUserAuthStore } from '@/stores/authUser.js'
 import axios from "axios";
+import http from "../helper/http";
 
 const route = useRoute()
 const router = useRouter()
@@ -131,7 +132,7 @@ const authUser = useUserAuthStore()
 
 /* Personal profile */
   const toProfile = (username) => {
-       axios.get('http://shalltears-app.test/api/v1/user/profile/' + username , {
+       http().get('/api/v1/user/profile/' + username , {
         headers: {
           Authorization: 'Bearer ' + localStorage.getItem('token')
         }

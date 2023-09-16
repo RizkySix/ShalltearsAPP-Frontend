@@ -24,6 +24,7 @@ import EditThread from "@/components/EditThread.vue";
 import axios from "axios";
 import { useAlbumStore } from '@/stores/album.js'
 import { ref } from "vue";
+import http from "../helper/http";
 
 const props = defineProps({
     threadDropdown: Boolean,
@@ -45,7 +46,7 @@ const deletePost = (uuid) => {
   const confirmation = window.confirm("Lanjut hapus thread permanent?");
 
   if (confirmation) {
-    axios.post('http://shalltears-app.test/api/v1/thread/' + uuid + '/force-delete' , {} , {
+    http().post('/api/v1/thread/' + uuid + '/force-delete' , {} , {
         headers: {
           Authorization: 'Bearer ' + localStorage.getItem('token')
         },

@@ -19,13 +19,14 @@ import axios from 'axios';
 import { ref } from 'vue';
 import { useRouter } from 'vue-router';
 import { useAlbumStore } from '@/stores/album';
+import http from '../helper/http';
 
 const thread = ref('')
 const router = useRouter()
 
 const albumActivity = useAlbumStore()
 const handleCreateThread = () => {
-    axios.post('http://shalltears-app.test/api/v1/thread' , {text: thread.value} , {
+    http().post('/api/v1/thread' , {text: thread.value} , {
         headers: {
          Authorization: 'Bearer ' + localStorage.getItem('token')
         },

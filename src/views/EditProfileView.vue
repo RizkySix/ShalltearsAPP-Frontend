@@ -137,6 +137,7 @@
   import { useRoute, useRouter } from "vue-router";
   import { useUserAuthStore } from '@/stores/authUser'
   import axios from "axios";
+import http from "../helper/http";
 
   const route = useRoute()
   const router = useRouter()
@@ -179,7 +180,7 @@
   
   /* Personal profile */
     const toProfile = async () => {
-        await axios.get('http://shalltears-app.test/api/v1/user/profile/' + route.params.username , {
+        await http().get('/api/v1/user/profile/' + route.params.username , {
           headers: {
             Authorization: 'Bearer ' + localStorage.getItem('token')
           }
@@ -208,7 +209,7 @@
 
     const handleUpdateProfile = () => {
       dataUser.address = document.getElementById('address').value
-        axios.put('http://shalltears-app.test/api/v1/profile' , dataUser , {
+        http().put('/api/v1/profile' , dataUser , {
             headers: {
             Authorization: 'Bearer ' + localStorage.getItem('token')
           }

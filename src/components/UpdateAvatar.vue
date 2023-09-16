@@ -54,6 +54,7 @@
   import Cropper from 'cropperjs';
   import axios from 'axios'
   import { useRoute, useRouter } from 'vue-router';
+import http from '../helper/http';
   
   export default defineComponent({
     name: 'ImageCropper',
@@ -89,7 +90,7 @@
         const formData = new FormData();
         formData.append('foto_profile', blob, 'cropped_image.jpg'); 
 
-        axios.post('http://shalltears-app.test/api/v1/profile/avatar', formData , {
+        http().post('/api/v1/profile/avatar', formData , {
             headers: {
                 Authorization: 'Bearer ' + localStorage.getItem('token'),
                 'Content-Type': 'multipart/form-data' 

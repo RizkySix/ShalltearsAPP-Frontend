@@ -23,6 +23,7 @@ import axios from 'axios';
 import { useAlbumStore } from '@/stores/album.js'
 import { useRoute } from 'vue-router';
 import { ref } from 'vue';
+import http from '../helper/http';
 
 defineProps({
     albumDropdown: Boolean,
@@ -36,7 +37,7 @@ const albumActivity = useAlbumStore()
 
 const archivePost = (uuid) => {
 
-    axios.delete('http://shalltears-app.test/api/v1/album/' + uuid , {
+    http().delete('/api/v1/album/' + uuid , {
     headers: {
           Authorization: 'Bearer ' + localStorage.getItem('token')
       }
@@ -58,7 +59,7 @@ const archivePost = (uuid) => {
 const deletePost = (uuid) => {
     const confirmed = window.confirm("Album akan terhapus permanen, lanjut?");
     if(confirmed){
-      axios.post('http://shalltears-app.test/api/v1/album/' + uuid + '/force-delete' , {} , {
+      http().post('/api/v1/album/' + uuid + '/force-delete' , {} , {
         headers: {
               Authorization: 'Bearer ' + localStorage.getItem('token')
           }
@@ -78,7 +79,7 @@ const deletePost = (uuid) => {
 
 
 const restorePost = (uuid) => {
-  axios.post('http://shalltears-app.test/api/v1/album/' + uuid + '/restore' , {} , {
+  http().post('/api/v1/album/' + uuid + '/restore' , {} , {
     headers: {
           Authorization: 'Bearer ' + localStorage.getItem('token')
       }

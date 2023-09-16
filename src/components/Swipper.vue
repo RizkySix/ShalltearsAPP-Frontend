@@ -40,6 +40,7 @@
  import 'swiper/css/pagination'
 import axios from 'axios';
 import { ref } from 'vue';
+import http from '../helper/http';
 
  export default {
     components: {Swiper, SwiperSlide},
@@ -51,7 +52,7 @@ import { ref } from 'vue';
         const confirmed = window.confirm("Yakin hapus gambar?");
 
         if(confirmed){
-          axios.delete('http://shalltears-app.test/api/v1/album-content/' + id , {
+          http().delete('/api/v1/album-content/' + id , {
             headers: {
                 Authorization: 'Bearer ' + localStorage.getItem('token')
             }

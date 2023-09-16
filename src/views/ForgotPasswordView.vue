@@ -35,12 +35,13 @@
 <script setup>
 import axios from 'axios';
 import { ref } from 'vue';
+import http from '../helper/http';
 
 const email = ref('')
 const resendStatus = ref(false)
 
 const handleResetPassword = () => {
-    axios.post('http://shalltears-app.test/api/v1/reset-password' , {email: email.value})
+    http().post('/api/v1/reset-password' , {email: email.value})
         .then((response) => {
            console.log(response.data)
            resendStatus.value = true
