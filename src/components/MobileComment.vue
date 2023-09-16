@@ -85,7 +85,7 @@
         <div id="footer-album" class="sticky bottom-0 bg-white z-20 border-t-2 h-[50px]">
             <form action="" @submit.prevent="handleComment">
             <label for="chat" class="sr-only">Your message</label>
-            <div class="flex items-center px-1 py-2 mt-4 rounded-lg dark:bg-gray-700">
+            <div class="flex items-center px-1 py-2 mt-4 rounded-lg">
                 <textarea v-on:input="limitCharacterCount" v-if="route.name !== 'archive.album'" id="chat" rows="1" v-model="commentText.comment" name="comment" class="comment-box block me-1 p-2.5 w-full text-sm text-gray-900 bg-white rounded-lg border border-gray-300 focus:ring-blue-500 focus:border-blue-500 " placeholder="Silahkan komentar..."></textarea>
 
                 <textarea v-if="route.name === 'archive.album'" disabled id="chat" rows="1" class="block me-1 p-2.5 w-full text-sm text-gray-900 bg-white rounded-lg border border-gray-300 focus:ring-blue-500 focus:border-blue-500 " placeholder="Tidak dapat membuat komentar pada arsip..."></textarea>

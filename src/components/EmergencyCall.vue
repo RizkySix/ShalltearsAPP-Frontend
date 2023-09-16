@@ -1,14 +1,14 @@
 <template>
-  <div class=" p-5 mx-auto bg-white">
+  <div class=" p-5 mx-auto bg-white rounded-lg">
         <form @submit.prevent="handleEmergency" action="">
             <div v-if="limit" >
                 <span class="text-xs text-red-600">⌛Limit harian digunakan, kirim lagi dalam {{ limit }} jam</span> <br>
             </div>
             <label for="emergency-call" class="font-bold text-base">Pesan untuk para Shalltears</label>
-            <textarea v-model="emergencyData.message" id="emergency-call" rows="4" class="block mt-3 mb-3 me-1 p-2.5 w-full text-sm text-gray-900 bg-white rounded-lg border border-gray-300 focus:ring-blue-500 focus:border-blue-500 dark:bg-gray-800 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500" placeholder="Mai warung..." required></textarea>
+            <textarea v-model="emergencyData.message" id="emergency-call" rows="4" class="block mt-3 mb-3 me-1 p-2.5 w-full text-sm text-gray-900 bg-white rounded-lg border border-gray-300 focus:ring-blue-500 focus:border-blue-500 " placeholder="Mai warung..." required></textarea>
 
             <label for="place" class="font-bold text-base">Lokasi pertemuan</label>
-            <GMapAutocomplete @place_changed="setPlace" type="text" name="place" id="place" class="mt-3 bg-gray-50 border border-gray-300 text-gray-900 sm:text-sm rounded-lg focus:ring-blue-600 focus:border-blue-600 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500" placeholder="Chaos war gaming house" required></GMapAutocomplete>
+            <GMapAutocomplete @place_changed="setPlace" type="text" name="place" id="place" class="mt-3 bg-gray-50 border border-gray-300 text-gray-900 sm:text-sm rounded-lg focus:ring-blue-600 focus:border-blue-600 block w-full p-2.5 " placeholder="Chaos war gaming house" required></GMapAutocomplete>
 
             <div id="awig-awig" class="mt-4">
                 <span class="text-sm">📩 Seluruh pengguna aktif akan menerima pesan anda!!!</span>

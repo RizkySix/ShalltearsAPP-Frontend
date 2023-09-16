@@ -1,6 +1,6 @@
 <template>
 <div v-if="notificationDropdown" id="dropdownNotifList" :class="{
-    'custom-scrollbar z-20 absolute md:-mt-4 md:top-full md:left-1/2 md:right-1/2 hidden md:block bg-white rounded-lg shadow w-96 dark:bg-gray-700 max-h-[300px] overflow-x-hidden overflow-scroll': position == 'top',
+    'custom-scrollbar z-20 absolute md:-mt-4 md:top-full md:left-1/2 md:right-1/2 hidden md:block bg-white shadow w-96 max-h-[300px] overflow-x-hidden overflow-scroll': position == 'top',
     'custom-scrollbar z-20 absolute bottom-full sm:block md:hidden bg-white rounded-lg shadow w-[19rem] dark:bg-gray-700 max-h-[300px] overflow-x-hidden overflow-scroll' : position == 'bottom'
 }">
         <div id="notifications" class="h-auto p-4 ">

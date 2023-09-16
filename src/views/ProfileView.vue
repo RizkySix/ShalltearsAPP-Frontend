@@ -32,7 +32,7 @@
 
   
 <!-- Breadcrumb -->
-<nav class="flex px-5 py-3 text-gray-700 border border-gray-200 bg-gray-50 dark:bg-gray-800 dark:border-gray-700" aria-label="Breadcrumb">
+<nav class="flex px-5 py-3 text-gray-700 border border-gray-200 bg-gray-50" aria-label="Breadcrumb">
   <ol class="inline-flex items-center mx-auto space-x-1 md:space-x-3">
     <li class="inline-flex items-center">
       <RouterLink v-if="route.name === 'profile'" id="album" :to="'/profile/' + route.params.username" class=" inline-flex items-center text-sm font-medium text-blue-600 hover:text-blue-600 dark:text-gray-400 dark:hover:text-white">

@@ -37,11 +37,11 @@
             }"
     />
 
-<div class="w-full px-4 mx-auto">
+<div class="w-full px-4 mx-auto bg-white rounded-lg">
  <form action="#" @submit.prevent="handleCreateAlbum">
            
 <label for="caption" class="block mb-2 text-sm font-medium text-gray-900 dark:text-white">Tulis Caption</label>
-<textarea v-model="caption" :disabled="captDisabled" name="caption" id="caption" rows="4" class="block p-2.5 w-full text-sm text-gray-900 bg-gray-50 rounded-lg border border-gray-300 focus:ring-blue-500 focus:border-blue-500 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500" placeholder="I need more bullets..."></textarea>
+<textarea v-model="caption" :disabled="captDisabled" name="caption" id="caption" rows="4" class="block p-2.5 w-full text-sm text-gray-900 bg-gray-50 rounded-lg border border-gray-300 focus:ring-blue-500 focus:border-blue-500 " placeholder="I need more bullets..."></textarea>
 
 <div class="w-full flex justify-end">
     <button @submit.prevent="handleCreateAlbum" type="submit" class="mb-1 w-24 mt-4 text-white bg-blue-600 hover:bg-blue-700 focus:ring-4 focus:outline-none focus:ring-blue-300 font-medium rounded-lg text-sm px-5 py-2.5 text-center dark:bg-blue-600 dark:hover:bg-blue-700 dark:focus:ring-blue-800">Posting</button>

@@ -20,9 +20,10 @@
     <div class="w-full md:w-7/12 md:me-4">
       <!-- Navbar mobile -->
       <div v-if="images.length != 0" id="mobile-header" class="md:hidden">
-        <div id="navbar-mobile" class="sticky top-0 p-4 rounded-lg bg-white h-auto z-10 border-b-2">
+        <div id="navbar-mobile" class="sticky top-0 p-4 rounded-t-lg bg-white h-auto z-10 border-b-2">
             <div class="flex mb-1 pt-2">
-              <img class="w-10 h-10 rounded-full me-4" :src="foto_profile" alt="user photo">
+              <img v-if="foto_profile" class="w-10 h-10 rounded-full me-4" :src="foto_profile" alt="user photo">
+              <img v-else class="w-10 h-10 rounded-full me-4" src="@/assets/clown.jpg" alt="user photo">
               <div class="w-4/5">
                 <span class=" font-semibold text-sm">{{ username }}</span> <br>
                 <span class="text-xs font-light">Post on {{ detailPost.created_at }}</span>
