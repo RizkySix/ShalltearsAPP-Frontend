@@ -49,7 +49,6 @@
  </form>
 </div>
 
-<button class="hidden" type="button" id="successCreateAlbum" @click="this.$toast.success(`Album berhasil ditambah`)">hidden</button>
 </template>
 
 <script setup>
@@ -68,6 +67,7 @@ import FilePondPluginImageCrop from "filepond-plugin-image-crop";
 
 import { useRoute, useRouter } from 'vue-router';
 import http from '../helper/http';
+import toastShow from '../helper/toastShow';
 
 const FilePond = vueFilePond(
   FilePondPluginFileValidateType,
@@ -159,12 +159,11 @@ const handleCreateAlbum = () => {
     },
   })
   .then((response) => {
-        const successNotif = document.querySelector('#successCreateAlbum')
 
         router.push({
             path: '/explorer'
         })
-        successNotif.click()
+       toastShow('Album dibuat' , true)
     })
     .catch((error) => {
         console.error(error)

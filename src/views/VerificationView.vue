@@ -47,13 +47,13 @@ import { otpSlider } from '@/assets/js/otp-slider.js'
 import axios from 'axios';
 import { useRouter } from 'vue-router';
 import http from '../helper/http';
+import toastShow from '../helper/toastShow';
 
 const router = useRouter()
 
 const email = ref(localStorage.getItem('email'))
 
 const resendStatus = ref(false);
-const failedOtpMsg = ref('');
 
 const handleVerifyOtp = () => {
 
@@ -77,13 +77,11 @@ const handleVerifyOtp = () => {
         })
     })
     .catch((error) => {
-        const errorOtp = document.getElementById('failedOtp')
         if(error.response.status == 400){
-            failedOtpMsg.value = 'Kode otp tidak valid !'
-            errorOtp.click()
+           toastShow('Kode otp tidak valid!' , false)
         }
 
-        console.error(error)
+        //console.error(error)
     })
 
 }
@@ -95,15 +93,13 @@ const handleResendOtp = () => {
     }
   })
     .then((response) => {
-        const resendOtp = document.getElementById('resendOtp')
-        resendOtp.click()
+        toastShow('Kode otp terkirim ke email' , true)
         response.status != 200 ? resendStatus.value = false :  resendStatus.value = true
     })
     .catch((error) => {
         const errorOtp = document.getElementById('failedOtp')
         if(error.response.status == 429){
-            failedOtpMsg.value = 'Terlalu banyak spam, tunggu lagi 1 menit 😡 !'
-            errorOtp.click()
+            toastShow('SPAM, coba lagi nanti' , false)
         }
         console.error(error)
     })

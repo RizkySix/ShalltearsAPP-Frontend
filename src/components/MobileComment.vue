@@ -1,7 +1,7 @@
 <template>
     <div v-if="isFetched === true">
-        <div class="custom-scrollbar relative  h-[550px] px-2 box-border">
-        <div id="navbar-album" class="sticky top-0 bg-white h-auto z-10 border-b-2">
+        <div class="custom-scrollbar relative bg-white rounded-lg h-[550px] px-2 box-border">
+        <div id="navbar-album" class="sticky top-0 h-auto z-10 border-b-2">
             <div class="flex mb-1 pt-2">
               <img v-if="foto_profile" class="w-10 h-10 rounded-full me-4" :src="foto_profile" alt="user photo">
               <img v-else class="w-10 h-10 rounded-full me-4" src="@/assets/clown.jpg" alt="user photo">
@@ -86,9 +86,9 @@
             <form action="" @submit.prevent="handleComment">
             <label for="chat" class="sr-only">Your message</label>
             <div class="flex items-center px-1 py-2 mt-4 rounded-lg dark:bg-gray-700">
-                <textarea v-on:input="limitCharacterCount" v-if="route.name !== 'archive.album'" id="chat" rows="1" v-model="commentText.comment" name="comment" class="comment-box block me-1 p-2.5 w-full text-sm text-gray-900 bg-white rounded-lg border border-gray-300 focus:ring-blue-500 focus:border-blue-500 dark:bg-gray-800 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500" placeholder="Silahkan komentar..."></textarea>
+                <textarea v-on:input="limitCharacterCount" v-if="route.name !== 'archive.album'" id="chat" rows="1" v-model="commentText.comment" name="comment" class="comment-box block me-1 p-2.5 w-full text-sm text-gray-900 bg-white rounded-lg border border-gray-300 focus:ring-blue-500 focus:border-blue-500 " placeholder="Silahkan komentar..."></textarea>
 
-                <textarea v-if="route.name === 'archive.album'" disabled id="chat" rows="1" class="block me-1 p-2.5 w-full text-sm text-gray-900 bg-white rounded-lg border border-gray-300 focus:ring-blue-500 focus:border-blue-500 dark:bg-gray-800 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500" placeholder="Tidak dapat membuat komentar pada arsip..."></textarea>
+                <textarea v-if="route.name === 'archive.album'" disabled id="chat" rows="1" class="block me-1 p-2.5 w-full text-sm text-gray-900 bg-white rounded-lg border border-gray-300 focus:ring-blue-500 focus:border-blue-500 " placeholder="Tidak dapat membuat komentar pada arsip..."></textarea>
               
                 <span id="xMark" v-if="subCommentText.comment_id != null" @click="closeSubCommentStatus" class="absolute me-16 hover:text-blue-400 right-0 font-bold text-black z-50 cursor-pointer">&#10005;</span>    
                 <button @submit.prevent="handleComment" type="submit" class="inline-flex justify-center p-2 text-blue-600 rounded-full cursor-pointer hover:bg-blue-100 dark:text-blue-500 dark:hover:bg-gray-600">
@@ -176,15 +176,18 @@ const handleComment = () => {
     //logic apakah kirim comentar atu balas comentar
     if(subCommentText.comment_id == null){
       commentText.post_id = props.detailPost.post_id
+
+      //batasi agar maksimal karakter comment 65
+      params.comment = params.comment.substring(0, 65);
     }else{
       endpoint = '/api/v1/sub-comment'
       subCommentText.sub_comment = commentText.comment
       params = subCommentText
-    }
 
       //batasi agar maksimal karakter comment 65
-      params.comment = params.comment.substring(0, 65);
-      
+      params.sub_comment = params.sub_comment.substring(0, 65);
+    }
+     
       http().post(endpoint , params , 
       {
       headers: {

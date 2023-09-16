@@ -11,7 +11,6 @@
 
     </div>
 
-    <button class="hidden" type="button" id="successCreateThread" @click="this.$toast.success(`Thread berhasil dibuat`)">hidden</button>
 </template>
 
 <script setup>
@@ -20,6 +19,7 @@ import { ref } from 'vue';
 import { useRouter } from 'vue-router';
 import { useAlbumStore } from '@/stores/album';
 import http from '../helper/http';
+import toastShow from '../helper/toastShow';
 
 const thread = ref('')
 const router = useRouter()
@@ -32,12 +32,12 @@ const handleCreateThread = () => {
         },
     })
     .then((response) => {
-        const successNotif = document.querySelector('#successCreateThread')
+       
         albumActivity.refresh = true
         router.push({
             path: '/explorer'
         })
-        successNotif.click()
+        toastShow('Thread dibuat' , true)
     })
     .catch((error) => {
         console.error(error)

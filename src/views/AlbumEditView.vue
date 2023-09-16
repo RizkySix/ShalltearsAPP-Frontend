@@ -33,13 +33,12 @@
 
 
   </div>
-  <button class="hidden" type="button" id="successEditAlbum" @click="this.$toast.success(`Album berhasil diperbarui`)">hidden</button>
-  <button class="hidden" type="button" id="failEditAlbum" @click="this.$toast.error(`Album gagal diperbarui`)">hidden</button>
 </template>
 
 <script setup>
 import axios from 'axios';
 import http from '@/helper/http'
+import toastShow from '@/helper/toastShow'
 import { ref, onMounted } from 'vue'
 import { useRoute, useRouter } from 'vue-router';
 
@@ -85,12 +84,10 @@ const handleEditAlbum = () => {
            router.push({
                 path: '/profile/' + authUser.username
            })
-           const successBtn = document.getElementById('successEditAlbum')
-           successBtn.click()
+           toastShow('Album diperbarui' , true)
         })
         .catch((error) => {
-            const failedBtn = document.getElementById('failEditAlbum')
-            failedBtn.click()
+            toastShow('Album gagal diperbarui' , false)
         })
 }
 

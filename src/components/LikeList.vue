@@ -1,6 +1,6 @@
 <template>
-    <div class="relative h-[400px] px-2 box-border">
-        <div id="like-header" class="p-4 sticky top-0 bg-white rounded-t-lg text-center h-auto border-b-2">
+    <div class="relative h-[400px] bg-white rounded-lg px-2 box-border">
+        <div id="like-header" class="p-4 sticky top-0 rounded-t-lg text-center h-auto border-b-2">
             <h3 class="font-semibold">Menyukai</h3>
         </div>
 

@@ -99,7 +99,7 @@
 
       </div>
 
-      <div v-if="contents.length > 0" class="w-full mt-3 mb-3">
+      <div v-if="contents.length >= 6" class="w-full mt-3 mb-3">
         <button @click="expandContents" class="w-full text-white bg-blue-700 py-2 px-4 rounded-lg hover:bg-blue-800 focus:ring-4 focus:outline-none focus:ring-blue-300 dark:bg-blue-600 dark:hover:bg-blue-700 dark:focus:ring-blue-800">Tampilkan lebih banyak</button>
       </div>
 

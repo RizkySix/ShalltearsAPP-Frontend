@@ -11,8 +11,6 @@
 
     </div>
 
-    <button class="hidden" type="button" id="successEditThread" @click="this.$toast.success(`Thread berhasil diperbarui`)">hidden</button>
-    <button class="hidden" type="button" id="failEditThread" @click="this.$toast.error(`Tidak dapat update lebih dari 1 jam`)">hidden</button>
 </template>
 
 <script setup>
@@ -21,6 +19,7 @@ import { ref } from 'vue';
 import { useRouter } from 'vue-router';
 import { useAlbumStore } from '@/stores/album.js'
 import http from '../helper/http';
+import toastShow from '../helper/toastShow';
 
 const props = defineProps({
     slug: String,
@@ -39,16 +38,14 @@ const handleEditThread = (slug) => {
     })
     .then((response) => {
         albumActivity.refresh = true
-        const successNotif = document.querySelector('#successEditThread')
-        successNotif.click()
+        toastShow('Thread diperbarui' , true)
     })
     .catch((error) => {
         console.error(error.response.status)
         if(error.response.status == 403){
-            const failNotif = document.querySelector('#failEditThread')
             document.querySelector('textarea').classList.remove('border-gray-300')
             document.querySelector('textarea').classList.add('border-red-700')
-            failNotif.click()
+           toastShow('Tidak dapat update lebih dari 1 jam' , false)
         }
     })
 }

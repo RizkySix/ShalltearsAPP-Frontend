@@ -1,5 +1,5 @@
 <template>
-  <div class=" p-5 mx-auto">
+  <div class=" p-5 mx-auto bg-white">
         <form @submit.prevent="handleEmergency" action="">
             <div v-if="limit" >
                 <span class="text-xs text-red-600">⌛Limit harian digunakan, kirim lagi dalam {{ limit }} jam</span> <br>
@@ -24,8 +24,6 @@
 
     </div>
 
-    <button class="hidden" type="button" id="successHitEmergencyCall" @click="this.$toast.success(`Pesan terkirim est 3 min`)">hidden</button>
-    <button class="hidden" type="button" id="failHitEmergencyCall" @click="this.$toast.error(`Pesan gagal terkirim`)">hidden</button>
 </template>
 
 <script setup>
@@ -33,6 +31,7 @@ import axios from 'axios';
 import { onMounted, reactive, ref } from 'vue';
 import { useUserAuthStore } from "@/stores/authUser";
 import http from '../helper/http';
+import toastShow from '../helper/toastShow';
 
 const emergencyData = reactive({
     message: '',
@@ -63,12 +62,10 @@ const handleEmergency = () => {
         })
         .then((response) => {
             userAuth.emergencySent = true
-            const successNotif = document.querySelector('#successHitEmergencyCall')
-            successNotif.click()
+            toastShow('Pesan terkirim est 2 min' , true)
         })
         .catch((error) => {
-            const failNotif = document.querySelector('#failHitEmergencyCall')
-            failNotif.click()
+           toastShow('Gagal terkirim' , false)
         })
 }
 

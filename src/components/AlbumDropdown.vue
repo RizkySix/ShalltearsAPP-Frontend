@@ -14,16 +14,14 @@
     </ul>
 </div>
 
-<button class="hidden" type="button" id="successInfo" @click="this.$toast.success('Aksi berhasil')">hidden</button>
-<button class="hidden" type="button" id="failedInfo" @click="this.$toast.error('Aksi gagal')">hidden</button>
 </template>
 
 <script setup>
 import axios from 'axios';
 import { useAlbumStore } from '@/stores/album.js'
 import { useRoute } from 'vue-router';
-import { ref } from 'vue';
 import http from '../helper/http';
+import toastShow from '../helper/toastShow';
 
 defineProps({
     albumDropdown: Boolean,
@@ -44,14 +42,12 @@ const archivePost = (uuid) => {
   })
   .then((response) => {
    albumActivity.refresh = true
-   const successInfo = document.getElementById('successInfo')
-   successInfo.click()
+   toastShow('Album diarsipkan' , true)
 
   })
   .catch((error) => {
     //console.error(error)
-    const failedInfo = document.getElementById('failedInfo')
-    failedInfo.click()
+   toastShow('Aksi gagal', false)
   })
 }
 
@@ -66,13 +62,11 @@ const deletePost = (uuid) => {
         })
         .then((response) => {
           albumActivity.refresh = true
-          const successInfo = document.getElementById('successInfo')
-          successInfo.click()
+          toastShow('Album dihapus' , true)
         })
         .catch((error) => {
           //console.error(error)
-          const failedInfo = document.getElementById('failedInfo')
-          failedInfo.click()
+          toastShow('Aksi gagal' , false)
         })
     }
 }
@@ -86,13 +80,11 @@ const restorePost = (uuid) => {
   })
   .then((response) => {
     albumActivity.refresh = true
-    const successInfo = document.getElementById('successInfo')
-    successInfo.click()
+    toastShow('Album ditampilkan' , true)
   })
   .catch((error) => {
     //console.error(error)
-    const failedInfo = document.getElementById('failedInfo')
-    failedInfo.click()
+    toastShow('Aksi gagal' , false)
   })
 }
 

@@ -263,17 +263,18 @@ const toggleModal = () => {
 
 const checkRoute = () => {
   if(route.name === 'profile'){
-    getAlbumEndpoint.value = http() + '/api/v1/user/albums/'
-    singlePostEndpoint.value = http() + '/api/v1/post/'
+    getAlbumEndpoint.value = '/api/v1/user/albums/'
+    singlePostEndpoint.value = '/api/v1/post/'
   }else if(route.name === 'archive.album'){
-    getAlbumEndpoint.value = http() + '/api/v1/user/albums/archived/'
-    singlePostEndpoint.value = http() + '/api/v1/post/archived/'
+    getAlbumEndpoint.value = '/api/v1/user/albums/archived/'
+    singlePostEndpoint.value = '/api/v1/post/archived/'
   }
 }
 
 const fetched = ref(false)
 const getAlbum = (username) => {
-     axios.get(getAlbumEndpoint.value + username , {
+    console.log(getAlbumEndpoint.value);
+     http().get(getAlbumEndpoint.value + username , {
       headers: {
         Authorization: 'Bearer ' + localStorage.getItem('token')
       }
@@ -325,7 +326,7 @@ const popupAlbum = (uuid) => {
 
     if(showPopup.value === true){
        
-         axios.get(singlePostEndpoint.value + uuid , {
+         http().get(singlePostEndpoint.value + uuid , {
             headers: {
                 Authorization: 'Bearer ' + localStorage.getItem('token')
             }
@@ -395,22 +396,25 @@ const subCommentText = reactive({
 
 const handleComment = () => {
 
-    let endpoint = http() + '/api/v1/comment'
+    let endpoint = '/api/v1/comment'
     let params = commentText
 
     //logic apakah kirim comentar atu balas comentar
     if(subCommentText.comment_id == null){
       commentText.post_id = detailPost.post_id
-    }else{
-      endpoint = http() + '/api/v1/sub-comment'
-      subCommentText.sub_comment = commentText.comment
-      params = subCommentText
-    }
 
       //membatasi agar maksimal karakter comment adalah 65
       params.comment = params.comment.substring(0 , 65)
+    }else{
+      endpoint = '/api/v1/sub-comment'
+      subCommentText.sub_comment = commentText.comment
+      params = subCommentText
+
+      //membatasi agar maksimal karakter comment adalah 65
+      params.sub_comment = params.sub_comment.substring(0 , 65)
+    }
   
-      axios.post(endpoint , params , 
+      http().post(endpoint , params , 
       {
       headers: {
             Authorization: 'Bearer ' + localStorage.getItem('token')

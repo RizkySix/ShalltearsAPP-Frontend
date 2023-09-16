@@ -33,17 +33,16 @@
       </div>
   </div>
 
-  <button class="hidden" type="button" id="failedLoginBtn" @click="this.$toast.error(`Data tidak valid 😟`)">hidden</button>
-  <button class="hidden" type="button" id="spamLogin" @click="this.$toast.error(`Terlalu banyak spam, coba kembali nanti`)">hidden</button>
 </section>
 
 </template>
 
 <script setup>
-import { reactive, onMounted , ref } from "vue";
+import { reactive } from "vue";
 import axios from "axios";
 import { useRouter } from 'vue-router';
 import http from "../helper/http";
+import toastShow from "../helper/toastShow";
 
 const credentials = reactive({
     user_mail: '',
@@ -51,6 +50,8 @@ const credentials = reactive({
 })
 
 const router = useRouter()
+
+
 
 const handleLogin = () => {
     http().post('/api/v1/login' , credentials)
@@ -69,10 +70,9 @@ const handleLogin = () => {
             }
         })
         .catch((error) => {
-            console.error(error)
-            const failedLoginBtn = document.getElementById('failedLoginBtn')
-            const spamLogin = document.getElementById('spamLogin')
-            error.response.status == 429 ? spamLogin.click() : failedLoginBtn.click()
+            let msgToast = ''
+            error.response.status === 429 ? msgToast = 'SPAM, coba lagi nanti' : msgToast = 'Data tidak valid 😟'
+            toastShow(msgToast , false)
         })
 }
 

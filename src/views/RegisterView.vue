@@ -16,7 +16,7 @@
                         <label for="first_name" class="block mb-2 text-sm font-medium text-gray-900 dark:text-white">Nama Depan</label>
                           <input v-model="credentials.first_name" type="text" name="first_name" id="first_name" class="bg-gray-50 border border-gray-300 text-gray-900 sm:text-sm rounded-lg focus:ring-blue-600 focus:border-blue-600 block lg:w-full md:w-full w-11/12 p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500" placeholder="Andika" required="">
                           <div v-if="errorMsg.first_name != '' ">
-                            <span class="text-red-400 text-sm">
+                            <span class="text-red-400 md:text-sm">
                             {{ errorMsg.first_name }}
                             </span>
                         </div>
@@ -26,7 +26,7 @@
                         <label for="last_name" class="block mb-2 text-sm font-medium text-gray-900 dark:text-white">Nama Belakang</label>
                           <input v-model="credentials.last_name" type="text" name="last_name" id="last_name" class="bg-gray-50 border border-gray-300 text-gray-900 sm:text-sm rounded-lg focus:ring-blue-600 focus:border-blue-600 block lg:w-full md:w-full w-11/12 p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500" placeholder="Machupicu" required="">
                           <div v-if="errorMsg.last_name != '' ">
-                            <span class="text-red-400 text-sm">
+                            <span class="text-red-400 md:text-sm">
                             {{ errorMsg.last_name }}
                             </span>
                         </div>
@@ -37,7 +37,7 @@
                         <label for="username" class="block mb-2 text-sm font-medium text-gray-900 dark:text-white">Username</label>
                           <input v-model="credentials.username" type="text" name="username" id="username" class="bg-gray-50 border border-gray-300 text-gray-900 sm:text-sm rounded-lg focus:ring-blue-600 focus:border-blue-600 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500" placeholder="andika666" @input="validCharacter" required="">
                           <div v-if="errorMsg.username != '' ">
-                            <span class="text-red-400 text-sm">
+                            <span class="text-red-400 md:text-sm">
                             {{ errorMsg.username }}
                             </span>
                         </div>
@@ -46,7 +46,7 @@
                           <label for="email" class="block mb-2 text-sm font-medium text-gray-900 dark:text-white">Email Aktif</label>
                           <input v-model="credentials.email" type="email" name="email" id="email" class="bg-gray-50 border border-gray-300 text-gray-900 sm:text-sm rounded-lg focus:ring-blue-600 focus:border-blue-600 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500" placeholder="name@company.com/rizky666" required="">
                           <div v-if="errorMsg.email != '' ">
-                            <span class="text-red-400 text-sm">
+                            <span class="text-red-400 md:text-sm">
                             {{ errorMsg.email }}
                             </span>
                         </div>
@@ -55,7 +55,7 @@
                           <label for="password" class="block mb-2 text-sm font-medium text-gray-900 dark:text-white">Password</label>
                           <input v-model="credentials.password" type="password" name="password" id="password" placeholder="••••••••" class="bg-gray-50 border border-gray-300 text-gray-900 sm:text-sm rounded-lg focus:ring-blue-600 focus:border-blue-600 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500" required="">
                           <div v-if="errorMsg.password != '' ">
-                            <span class="text-red-400 text-sm">
+                            <span class="text-red-400 md:text-sm">
                             {{ errorMsg.password }}
                             </span>
                         </div>
@@ -68,7 +68,7 @@
                         <label for="address" class="block mb-2 text-sm font-medium text-gray-900 dark:text-white">Alamat anda</label>
                           <GMapAutocomplete type="text" name="address" id="address" class="bg-gray-50 border border-gray-300 text-gray-900 sm:text-sm rounded-lg focus:ring-blue-600 focus:border-blue-600 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500" placeholder="Jalan pakerisan jawa timur" required=""></GMapAutocomplete>
                           <div v-if="errorMsg.address != '' ">
-                            <span class="text-red-400 text-sm">
+                            <span class="text-red-400 md:text-sm">
                             {{ errorMsg.address }}
                             </span>
                         </div>
@@ -116,8 +116,10 @@ const validCharacter = (event) => {
       credentials.username = sanitizedValue;
   }
 
+
 const handleRegister = () => {
   credentials.address = document.getElementById('address').value
+   
     http().post('/api/v1/register' , credentials)
         .then((response) => {
 

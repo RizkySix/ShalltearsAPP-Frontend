@@ -26,9 +26,6 @@
       </div>
   </div>
 
-  <button class="hidden" type="button" id="successSend" @click="this.$toast.success(`Password baru terkirim, check email anda`)">hidden</button>
-  <button class="hidden" type="button" id="failedSend" @click="this.$toast.error(`Email tidak ditemukan`)">hidden</button>
-  <button class="hidden" type="button" id="spamResetPassword" @click="this.$toast.error(`Terlalu banyak spam, coba kembali nanti`)">hidden</button>
 </section>
 </template>
 
@@ -36,6 +33,7 @@
 import axios from 'axios';
 import { ref } from 'vue';
 import http from '../helper/http';
+import toastShow from "../helper/toastShow";
 
 const email = ref('')
 const resendStatus = ref(false)
@@ -43,16 +41,13 @@ const resendStatus = ref(false)
 const handleResetPassword = () => {
     http().post('/api/v1/reset-password' , {email: email.value})
         .then((response) => {
-           console.log(response.data)
            resendStatus.value = true
-           const successSend = document.getElementById('successSend')
-           successSend.click()
+           toastShow('Password terkirim, check email anda' , true)
         })
         .catch((error) => {
-            console.error(error)
-            const failedSend = document.getElementById('failedSend')
-            const spamResetPassword = document.getElementById('spamResetPassword')
-            error.response.status == 429 ? spamResetPassword.click() : failedSend.click()
+            let msgToast = ''
+            error.response.status == 429 ? msgToast = 'SPAM, coba lagi nanti' : msgToast = 'Email tidak ditemukan'
+            toastShow(msgToast , false)
         })
 }
 

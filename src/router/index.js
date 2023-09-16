@@ -196,7 +196,7 @@ router.beforeEach((to,from) => {
 
       if(to.name === 'login' || to.name === 'register' || to.name === 'forgot.password'){
         return {
-          name: 'home'
+          name: 'explorer'
         }
       }
 

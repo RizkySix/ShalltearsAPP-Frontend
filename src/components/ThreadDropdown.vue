@@ -25,6 +25,7 @@ import axios from "axios";
 import { useAlbumStore } from '@/stores/album.js'
 import { ref } from "vue";
 import http from "../helper/http";
+import toastShow from "../helper/toastShow";
 
 const props = defineProps({
     threadDropdown: Boolean,
@@ -53,11 +54,10 @@ const deletePost = (uuid) => {
     })
     .then((response) => {
         albumActivity.refresh = true 
-        const deleted = document.querySelector('#deletedThread')
-        deleted.click()
+        toastShow('Thread terhapus' , true)
     })
     .catch((error) => {
-        console.error(error.response.status)
+        //console.error(error.response.status)
     })
   }
 }

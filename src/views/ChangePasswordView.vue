@@ -86,7 +86,6 @@
         <Loaded/>
     </section>
 
-    <button class="hidden" type="button" id="successChangePassword" @click="this.$toast.success(`Password berhasil dirubah`)">hidden</button>
     <BottomNavbar/>
     
 </template>
@@ -101,6 +100,7 @@ import axios from "axios";
 import { useRouter } from "vue-router";
 import { useUserAuthStore } from "@/stores/authUser";
 import http from "../helper/http";
+import toastShow from "../helper/toastShow";
 
 const router = useRouter()
 
@@ -149,8 +149,7 @@ const handleChangePassword = () => {
             router.push({
                 path: '/profile/' + userAuth.username
             })
-            const successChangePassword = document.getElementById('successChangePassword')
-            successChangePassword.click()
+            toastShow('Password berhasil dirubah' , true)
         })
         .catch((error) => {
     

@@ -4,22 +4,22 @@
   <div>
   
   <section v-if="isExist == 'fetched'" class="mb-24 lg:mb-12">
-    <div class="w-full max-w-3xl m-auto bg-white border border-gray-200 rounded-lg shadow dark:bg-gray-800 dark:border-gray-700">
+    <div class="w-full max-w-3xl m-auto bg-white border border-gray-200 rounded-lg shadow">
    <div class="flex items-center justify-around p-4">
       <img v-if="dataUser.foto_profile !== ''" class=" lg:w-32 lg:h-32 w-24 h-24 rounded-full shadow-lg" :src="dataUser.foto_profile" alt="Rusak"/>
       <img v-else class=" lg:w-32 lg:h-32 w-24 h-24 rounded-full shadow-lg" src="@/assets/clown.jpg" alt="Rusak"/>
       <div class="ms-4 lg:ms-0">
-        <h5 class="text-lg font-semibold text-gray-900 dark:text-white">{{ dataUser.full_name }}</h5>
+        <h5 class="text-base md:text-lg font-semibold text-gray-900 ">{{ dataUser.full_name }}</h5>
         <span class="text-sm text-gray-500 dark:text-gray-400">@{{ dataUser.username }}</span>
       </div>
       <div class="flex justify-between">
       <div class="me-4">
-        <span class="text-lg font-semibold text-gray-900 dark:text-white">{{ dataUser.total_threads }}</span> <br>
-        <span class=" font-semibold text-gray-900 dark:text-white">Threads</span>
+        <span class="text-lg font-semibold text-gray-900 ">{{ dataUser.total_threads }}</span> <br>
+        <span class=" font-semibold text-gray-900 ">Threads</span>
       </div>
       <div>
-        <span class="text-lg  font-semibold text-gray-900 dark:text-white">{{ dataUser.total_albums }}</span> <br>
-        <span class=" font-semibold text-gray-900 dark:text-white">Albums</span>
+        <span class="text-lg  font-semibold text-gray-900 ">{{ dataUser.total_albums }}</span> <br>
+        <span class=" font-semibold text-gray-900 ">Albums</span>
       </div>
     </div>
     </div>
