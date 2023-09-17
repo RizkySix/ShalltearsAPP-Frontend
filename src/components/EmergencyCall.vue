@@ -65,6 +65,7 @@ const handleEmergency = () => {
             toastShow('Pesan terkirim est 6 min' , true)
         })
         .catch((error) => {
+            console.error(error)
            toastShow('Gagal terkirim' , false)
         })
 }
@@ -77,9 +78,10 @@ const checkLimit = () => {
         }
         })
         .then((response) => {
-
+            response.data.message
         })
         .catch((error) => {
+            error.response.data.message
             limit.value = error.response.data.message
         })
 }
