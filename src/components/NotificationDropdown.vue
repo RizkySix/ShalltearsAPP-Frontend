@@ -94,6 +94,7 @@ const handleClearNotif = () => {
         })
         .then((response) => {
             userAuth.notification.notification_list = null
+            userAuth.notification.total_notification = 0
         })
         .catch((error) => {
             //console.error(error)

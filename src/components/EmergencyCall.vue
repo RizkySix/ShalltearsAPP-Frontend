@@ -62,7 +62,7 @@ const handleEmergency = () => {
         })
         .then((response) => {
             userAuth.emergencySent = true
-            toastShow('Pesan terkirim est 2 min' , true)
+            toastShow('Pesan terkirim est 6 min' , true)
         })
         .catch((error) => {
            toastShow('Gagal terkirim' , false)
