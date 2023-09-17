@@ -5,7 +5,7 @@
         <img class="w-32 h-auto" src="@/assets/logo.png" alt="logo"> 
       </a>
       <div class="w-full bg-white rounded-lg shadow dark:border md:mt-0 sm:max-w-md xl:p-0 dark:bg-gray-800 dark:border-gray-700">
-        <img v-if="waitingResponse" class="h-8 w-8 mx-auto mt-4" src="@/assets/spiner.gif" alt="">
+        <img v-if="waitingResponse" class="h-8 w-8 mx-auto mt-4 animate-spin" src="https://www.svgrepo.com/show/70469/loading.svg" alt="">
           <div class="p-6 space-y-4 md:space-y-6 sm:p-8">
               <h1 class="text-lg font-bold leading-tight tracking-tight text-gray-900 md:text-xl dark:text-white">
                   Password baru akan dikirim untuk anda

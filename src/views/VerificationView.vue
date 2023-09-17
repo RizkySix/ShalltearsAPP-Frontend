@@ -7,7 +7,7 @@
                     <img class="w-32 h-auto" src="@/assets/logo.png" alt="logo"> 
                 </a>
                 <div class="bg-white rounded shadow dark:border h-64 py-3 text-center">
-                    <img v-if="waitingResponse" class="h-8 w-8 mx-auto my-2" src="@/assets/spiner.gif" alt="">
+                    <img v-if="waitingResponse" class="h-8 w-8 mx-auto my-2 animate-spin" src="https://www.svgrepo.com/show/70469/loading.svg" alt="">
                       <h1 class="text-2xl font-bold">Verifikasi OTP</h1>
                       <div class="flex flex-col mt-4">
                           <span>Masukan 6 digit kode otp yang kamu terima pada</span>
