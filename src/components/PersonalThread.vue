@@ -11,7 +11,7 @@
   <MobileComment :detailPost="detailPost" :foto_profile="foto_profile" :username="username" />
 </BaseModal>
 
-<div class="w-full max-w-3xl m-auto bg-white mt-3 p-4 md:p-0">
+<div class="w-full max-w-3xl m-auto bg-white mt-3 md:p-0">
   <div v-if="userAuth.username ===  route.params.username" class="">
     <button class="mx-auto block py-2 px-4" @click="toggleModal">
         <span class="hover:text-blue-500">
@@ -26,13 +26,14 @@
   <div v-for="(post, index) in threads" :key="index" >
     <div class="rounded-lg shadow p-4 mb-4">
         <div class="flex mb-1 pt-2">
-            <img class="w-16 h-16 rounded-full me-4" :src="foto_profile" alt="user photo">
+            <img v-if="foto_profile" class="w-16 h-16 rounded-full me-4" :src="foto_profile" alt="user photo">
+            <img v-else class="w-16 h-16 rounded-full me-4" src="@/assets/clown.jpg" alt="user photo">
               <div class="w-4/5">
                 <span class=" font-semibold text-lg">{{ username }}</span> <br>
                 <span class="text-sm font-light">Post on {{ post.created_at }}</span>
               </div>
               <div class="relative">
-                <span @click="dropdownThread(post.uuid)" class="cursor-pointer font-bold text-2xl">&#8230</span>
+                <span v-if="userAuth.username == route.params.username" @click="dropdownThread(post.uuid)" class="cursor-pointer font-bold text-2xl">&#8230</span>
                 <ThreadDropdown v-if="activeDropdown == post.uuid" :threadDropdown="threadDropdown" :slug="post.thread.slug" :postUuid="post.uuid" :thread="post.thread.text" />
               </div>
         </div>

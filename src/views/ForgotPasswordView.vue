@@ -5,6 +5,7 @@
         <img class="w-32 h-auto" src="@/assets/logo.png" alt="logo"> 
       </a>
       <div class="w-full bg-white rounded-lg shadow dark:border md:mt-0 sm:max-w-md xl:p-0 dark:bg-gray-800 dark:border-gray-700">
+        <img v-if="waitingResponse" class="h-8 w-8 mx-auto mt-4" src="https://icons8.com/preloaders/preloaders/1488/Iphone-spinner-2.gif" alt="">
           <div class="p-6 space-y-4 md:space-y-6 sm:p-8">
               <h1 class="text-lg font-bold leading-tight tracking-tight text-gray-900 md:text-xl dark:text-white">
                   Password baru akan dikirim untuk anda
@@ -18,7 +19,7 @@
                       <div class="flex items-start">
                         
                       </div>
-                      <button v-if="resendStatus == false" @submit.prevent="handleResetPassword" class="text-sm font-medium text-blue-600 hover:underline dark:text-blue-500"><i class="fa-solid fa-share" style="color: #81d41c;"></i> Send reset password</button>
+                      <button v-if="resendStatus == false" @submit.prevent="handleResetPassword" class="text-sm font-medium text-blue-600 hover:underline dark:text-blue-500"><i class="fa-solid fa-share" style="color: #81d41c;"></i> Send reset password </button> 
                       <button v-else @submit.prevent="handleResetPassword" class="text-sm font-medium text-blue-600 hover:underline dark:text-blue-500"><i class="fa-solid fa-share" style="color: #81d41c;"></i> Resend reset password</button>
                   </div>
               </form>
@@ -37,14 +38,17 @@ import toastShow from "../helper/toastShow";
 
 const email = ref('')
 const resendStatus = ref(false)
-
+const waitingResponse = ref(false)
 const handleResetPassword = () => {
+    waitingResponse.value = true
     http().post('/api/v1/reset-password' , {email: email.value})
         .then((response) => {
            resendStatus.value = true
+           waitingResponse.value = false
            toastShow('Password terkirim, check email anda' , true)
         })
         .catch((error) => {
+            waitingResponse.value = false
             let msgToast = ''
             error.response.status == 429 ? msgToast = 'SPAM, coba lagi nanti' : msgToast = 'Email tidak ditemukan'
             toastShow(msgToast , false)

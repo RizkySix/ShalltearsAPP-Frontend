@@ -51,8 +51,6 @@ const credentials = reactive({
 
 const router = useRouter()
 
-
-
 const handleLogin = () => {
     http().post('/api/v1/login' , credentials)
         .then((response) => {

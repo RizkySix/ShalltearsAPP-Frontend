@@ -1,4 +1,11 @@
 <template>
+    <ConfirmBox :confirmActive="confirmActive" @close-confirm="deleteImage">
+    <div class="p-4 text-center">
+       <span class="font-semibold text-lg">
+          Lanjut Hapus Foto?
+       </span>
+    </div>
+  </ConfirmBox>
 <swiper
     :modules="modules"
     :space-between="20"
@@ -42,33 +49,46 @@ import axios from 'axios';
 import { ref } from 'vue';
 import http from '../helper/http';
 
+import ConfirmBox from "@/components/ConfirmBox.vue";
+import { useAlbumStore } from '../stores/album';
+
  export default {
-    components: {Swiper, SwiperSlide},
+    components: {Swiper, SwiperSlide , ConfirmBox},
     props: ['images' , 'albumEdit' , 'explorer'],
     setup(props) {
 
-      const editImages = ref(props.images)
-      const deleteImage = (id) => {
-        const confirmed = window.confirm("Yakin hapus gambar?");
+      const albumActivity = useAlbumStore()
 
-        if(confirmed){
-          http().delete('/api/v1/album-content/' + id , {
+      const confirmActive = ref(null)
+      const editImages = ref(props.images)
+      const currentId = ref(null)
+
+      const deleteImage = (id = null) => {
+        confirmActive.value = !confirmActive.value
+         id != null ? currentId.value = id : null
+
+        if(albumActivity.confirmBoxAct == true && currentId.value){
+          http().delete('/api/v1/album-content/' + currentId.value , {
             headers: {
                 Authorization: 'Bearer ' + localStorage.getItem('token')
             }
             })
             .then((response) => {
-                editImages.value = editImages.value.filter(image => image.id !== id)
+                editImages.value = editImages.value.filter(image => image.id !== currentId.value)
+                currentId.value = null
             })
             .catch((error) => {
                 console.error(error)
+                currentId.value = null
             })
         }
+
+        albumActivity.confirmBoxAct = null
       }
 
      
 
-        return { modules: [Autoplay , Pagination] , deleteImage , editImages }
+        return { modules: [Autoplay , Pagination] , deleteImage , editImages , confirmActive }
     }
  }
 

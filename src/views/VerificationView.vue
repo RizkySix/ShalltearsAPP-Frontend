@@ -7,6 +7,7 @@
                     <img class="w-32 h-auto" src="@/assets/logo.png" alt="logo"> 
                 </a>
                 <div class="bg-white rounded shadow dark:border h-64 py-3 text-center">
+                    <img v-if="waitingResponse" class="h-8 w-8 mx-auto my-2" src="https://icons8.com/preloaders/preloaders/1488/Iphone-spinner-2.gif" alt="">
                       <h1 class="text-2xl font-bold">Verifikasi OTP</h1>
                       <div class="flex flex-col mt-4">
                           <span>Masukan 6 digit kode otp yang kamu terima pada</span>
@@ -51,11 +52,12 @@ import toastShow from '../helper/toastShow';
 const router = useRouter()
 
 const email = ref(localStorage.getItem('email'))
+const waitingResponse = ref(false)
 
 const resendStatus = ref(false);
 
 const handleVerifyOtp = () => {
-
+waitingResponse.value = true
   const otpCode = document.getElementById('first').value + 
                  document.getElementById('second').value + 
                  document.getElementById('third').value + 
@@ -69,6 +71,7 @@ const handleVerifyOtp = () => {
     }
   })
     .then((response) => {
+        waitingResponse.value = false
         localStorage.removeItem('email')
         localStorage.setItem('email_verified_status' , true)
         router.push({
@@ -76,16 +79,18 @@ const handleVerifyOtp = () => {
         })
     })
     .catch((error) => {
+        waitingResponse.value = false
         if(error.response.status == 400){
            toastShow('Kode otp tidak valid!' , false)
         }
 
         //console.error(error)
     })
-
+    
 }
 
 const handleResendOtp = () => {
+    waitingResponse.value = true
     http().post('/api/v1/resend-otp' , {} , {
     headers: {
         Authorization: 'Bearer ' + localStorage.getItem('token') 
@@ -93,15 +98,16 @@ const handleResendOtp = () => {
   })
     .then((response) => {
         toastShow('Kode otp terkirim ke email' , true)
+        waitingResponse.value = false
         response.status != 200 ? resendStatus.value = false :  resendStatus.value = true
     })
     .catch((error) => {
-        const errorOtp = document.getElementById('failedOtp')
+        waitingResponse.value = false
         if(error.response.status == 429){
             toastShow('SPAM, coba lagi nanti' , false)
         }
-        console.error(error)
     })
+
 }
 
 

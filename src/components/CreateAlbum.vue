@@ -127,10 +127,10 @@ const allUploaded = () => {
     },
     })
     .then((response) => {
-        console.log(response.data)
+        //console.log(response.data)
     })
     .catch((error) => {
-        console.error(error)
+        //console.error(error)
     })
 }
 
@@ -163,7 +163,7 @@ const handleCreateAlbum = () => {
         router.push({
             path: '/explorer'
         })
-       toastShow('Album dibuat' , true)
+       toastShow('Album dibuat' , true , 10000)
     })
     .catch((error) => {
         console.error(error)

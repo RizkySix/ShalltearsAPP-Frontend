@@ -5,6 +5,7 @@
             <img class="w-32 h-auto" src="@/assets/logo.png" alt="logo"> 
           </a>
           <div class="w-full bg-white rounded-lg shadow dark:border md:mt-0 sm:max-w-md xl:p-0 dark:bg-gray-800 dark:border-gray-700">
+            <img v-if="waitingResponse" class="h-8 w-8 mx-auto mt-4" src="https://icons8.com/preloaders/preloaders/1488/Iphone-spinner-2.gif" alt="">
               <div class="p-6 space-y-4 md:space-y-6 sm:p-8">
                   <h1 class="text-xl font-bold leading-tight tracking-tight text-gray-900 md:text-2xl dark:text-white">
                      Buat akun Shalltears
@@ -116,13 +117,14 @@ const validCharacter = (event) => {
       credentials.username = sanitizedValue;
   }
 
-
+const waitingResponse = ref(false)
 const handleRegister = () => {
+  waitingResponse.value = true
   credentials.address = document.getElementById('address').value
    
     http().post('/api/v1/register' , credentials)
         .then((response) => {
-
+            waitingResponse.value = false
             localStorage.setItem('token' , response.data.token)
             localStorage.setItem('email' , credentials.email)
             router.push({
@@ -130,7 +132,7 @@ const handleRegister = () => {
             })    
         })
         .catch((error) => {
-                console.error(error.response)
+               waitingResponse.value = false
 
                 errorMsg.first_name = ''
                 errorMsg.last_name = ''

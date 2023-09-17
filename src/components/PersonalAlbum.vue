@@ -274,7 +274,7 @@ const checkRoute = () => {
 
 const fetched = ref(false)
 const getAlbum = (username) => {
-    console.log(getAlbumEndpoint.value);
+    
      http().get(getAlbumEndpoint.value + username , {
       headers: {
         Authorization: 'Bearer ' + localStorage.getItem('token')

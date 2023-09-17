@@ -1,4 +1,12 @@
 <template>
+  <ConfirmBox :confirmActive="confirmActive" @close-confirm="showConfirmBox">
+    <div class="p-4 text-center">
+       <span class="font-semibold text-lg">
+          Lanjut Hapus Thread?
+       </span>
+    </div>
+  </ConfirmBox>
+
 
 <BaseModal :modalActive="modalActive" :width="modalWidth" @close-modal="toggleModal">
 <EditThread :slug="slug" :thread="thread" />
@@ -11,19 +19,21 @@
           </li>
     
           <li>
-          <a @click="deletePost(postUuid)" class="block cursor-pointer px-4 py-2 hover:bg-gray-100 dark:hover:bg-gray-600 dark:hover:text-white">Delete</a>
+          <a @click="showConfirmBox()" class="block cursor-pointer px-4 py-2 hover:bg-gray-100 dark:hover:bg-gray-600 dark:hover:text-white">Delete</a>
           </li>
       </ul>
   </div>
-  <button class="hidden" type="button" id="deletedThread" @click="this.$toast.success(`Thread berhasil dihapus`)">hidden</button>
+ 
   </template>
 
 <script setup>
 import BaseModal from "@/components/BaseModal.vue";
 import EditThread from "@/components/EditThread.vue";
+import ConfirmBox from "@/components/ConfirmBox.vue";
+
 import axios from "axios";
 import { useAlbumStore } from '@/stores/album.js'
-import { ref } from "vue";
+import { ref, watch } from "vue";
 import http from "../helper/http";
 import toastShow from "../helper/toastShow";
 
@@ -42,12 +52,16 @@ const toggleModal = () => {
     modalActive.value == true ? document.body.style.overflow = 'hidden' : document.body.style.overflow = 'visible'
 }
 
+const confirmActive = ref(null)
+const showConfirmBox = () => {
+  confirmActive.value = !confirmActive.value
+  document.body.style.overflow = 'hidden'
+}
+
+
 const albumActivity = useAlbumStore()
 const deletePost = (uuid) => {
-  const confirmation = window.confirm("Lanjut hapus thread permanent?");
-
-  if (confirmation) {
-    http().post('/api/v1/thread/' + uuid + '/force-delete' , {} , {
+  http().post('/api/v1/thread/' + uuid + '/force-delete' , {} , {
         headers: {
           Authorization: 'Bearer ' + localStorage.getItem('token')
         },
@@ -59,8 +73,13 @@ const deletePost = (uuid) => {
     .catch((error) => {
         //console.error(error.response.status)
     })
-  }
+   
 }
+
+watch([() => albumActivity.confirmBoxAct] , ([currentAct] , [prevAct]) => {
+    currentAct == true ? (deletePost(props.postUuid) , albumActivity.confirmBoxAct = null) : albumActivity.confirmBoxAct = null
+    document.body.style.overflow = 'visible'
+} )
 
 
 </script>
