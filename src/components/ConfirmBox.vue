@@ -5,7 +5,7 @@
        <!-- for the modal -->
        <Transition name="modal-inner">
          <div v-if="confirmActive" :class="['relative', 'self-start', 'mt-32', 'mb-20' , 'w-full max-w-[15rem] md:max-w-xs lg:max-h-full', 'py']">
-       <div class="relative bg-white rounded-lg shadow dark:bg-gray-700">
+       <div class="relative bg-white rounded-lg shadow">
           <slot/>
 
           <div class="px-4 py-2 flex justify-center">
