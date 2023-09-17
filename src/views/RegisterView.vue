@@ -5,7 +5,7 @@
             <img class="w-32 h-auto" src="@/assets/logo.png" alt="logo"> 
           </a>
           <div class="w-full bg-white rounded-lg shadow dark:border md:mt-0 sm:max-w-md xl:p-0 dark:bg-gray-800 dark:border-gray-700">
-            <img v-if="waitingResponse" class="h-8 w-8 mx-auto mt-4" src="https://icons8.com/preloaders/preloaders/1488/Iphone-spinner-2.gif" alt="">
+            <img v-if="waitingResponse" class="h-8 w-8 mx-auto mt-4" src="@/assets/spiner.gif" alt="">
               <div class="p-6 space-y-4 md:space-y-6 sm:p-8">
                   <h1 class="text-xl font-bold leading-tight tracking-tight text-gray-900 md:text-2xl dark:text-white">
                      Buat akun Shalltears

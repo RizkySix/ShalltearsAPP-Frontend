@@ -7,7 +7,7 @@
                     <img class="w-32 h-auto" src="@/assets/logo.png" alt="logo"> 
                 </a>
                 <div class="bg-white rounded shadow dark:border h-64 py-3 text-center">
-                    <img v-if="waitingResponse" class="h-8 w-8 mx-auto my-2" src="https://icons8.com/preloaders/preloaders/1488/Iphone-spinner-2.gif" alt="">
+                    <img v-if="waitingResponse" class="h-8 w-8 mx-auto my-2" src="@/assets/spiner.gif" alt="">
                       <h1 class="text-2xl font-bold">Verifikasi OTP</h1>
                       <div class="flex flex-col mt-4">
                           <span>Masukan 6 digit kode otp yang kamu terima pada</span>
@@ -31,13 +31,17 @@
                             <button @submit.prevent="handleResendOtp" class="flex items-center text-blue-700 hover:text-blue-900 cursor-pointer"><span class="font-bold">Resend OTP</span><i class='bx bx-caret-right ml-1'></i></button>
                          </div>
                       </form>
+
+                      <form class="flex justify-center text-center mt-5" action="#" @submit.prevent="handleLogout">
+                         <div>
+                            <button @submit.prevent="handleLogout" class="flex items-center text-blue-700 hover:text-blue-900 cursor-pointer"><span class="font-bold">Sign Out</span><i class='bx bx-caret-right ml-1'></i></button>
+                         </div>
+                      </form>
                 </div>
             </div>
         </div>
     </div>
 </div>
-<button @click="this.$toast.error(failedOtpMsg)" type="button" class="hidden" id="failedOtp" ref="failedOtp">hidden</button>
-<button @click="this.$toast.success(`Kode Otp terbaru berhasil terkirim ke ` + email)"  type="button" class="hidden" id="resendOtp" ref="resendOtp">hidden</button>
 
 </template>
 
@@ -48,6 +52,7 @@ import axios from 'axios';
 import { useRouter } from 'vue-router';
 import http from '../helper/http';
 import toastShow from '../helper/toastShow';
+import { useUserAuthStore } from '@/stores/authUser';
 
 const router = useRouter()
 
@@ -109,6 +114,29 @@ const handleResendOtp = () => {
     })
 
 }
+
+  /* Logout */
+  const userAuth = useUserAuthStore()
+  const handleLogout = () => {
+    http().post('/api/v1/logout' , {} , {
+    headers: {
+      Authorization: 'Bearer ' + localStorage.getItem('token')
+    }
+  })
+    .then((response) => {
+        localStorage.clear()
+        userAuth.username  = ''
+        userAuth.notification.notification_list  = null
+        userAuth.notification.readed_notification  = null
+        userAuth.notification.total_notification  = 0
+        router.push({
+          name: 'login'
+        })
+    })
+    .catch((error) => {
+      
+    })
+  }
 
 
 onMounted(() => {
