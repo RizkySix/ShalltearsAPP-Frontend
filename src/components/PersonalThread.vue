@@ -28,9 +28,9 @@
         <div class="flex mb-1 pt-2">
             <img v-if="foto_profile" class="w-16 h-16 rounded-full me-4" :src="foto_profile" alt="user photo">
             <img v-else class="w-16 h-16 rounded-full me-4" src="@/assets/clown.jpg" alt="user photo">
-              <div class="w-4/5">
-                <span class=" font-semibold text-lg">{{ username }}</span> <br>
-                <span class="text-sm font-light">Post on {{ post.created_at }}</span>
+              <div class="w-3/5 break-words me-auto">
+                <span class=" font-semibold text-base md:text-lg">{{ username }}</span> <br>
+                <span class="text-xs md:text-sm font-light">Post on {{ post.created_at }}</span>
               </div>
               <div class="relative">
                 <span v-if="userAuth.username == route.params.username" @click="dropdownThread(post.uuid)" class="cursor-pointer font-bold text-2xl">&#8230</span>

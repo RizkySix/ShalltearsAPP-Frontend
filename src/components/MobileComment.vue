@@ -5,7 +5,7 @@
             <div class="flex mb-1 pt-2">
               <img v-if="foto_profile" class="w-10 h-10 rounded-full me-4" :src="foto_profile" alt="user photo">
               <img v-else class="w-10 h-10 rounded-full me-4" src="@/assets/clown.jpg" alt="user photo">
-              <div class="w-4/5">
+              <div class=" w-9/12 break-words">
                 <span class=" font-semibold text-sm">{{ username }}</span> <br>
                 <span class="text-xs font-light">Post on {{ props.detailPost.created_at }}</span>
               </div>
@@ -17,7 +17,7 @@
           <div v-if="props.detailPost.caption"  class="flex mb-4 pt-2">
               <img v-if="foto_profile" class="w-10 h-10 rounded-full me-4" :src="foto_profile" alt="user photo">
               <img v-else class="w-10 h-10 rounded-full me-4" src="@/assets/clown.jpg" alt="user photo">
-              <div>
+              <div class="w-4/5 break-words">
                 <span class=" font-semibold text-sm me-2">{{ username }}</span>
                 <pre class="capt text-sm ">{{ props.detailPost.caption }}</pre>
               </div>
@@ -25,15 +25,15 @@
             
             <!-- Comments -->
             <div v-if="allComment.length != 0"> 
-              <div v-for="(comment , index) in allComment" :key="index" class="flex mb-4 pt-2">
+              <div v-for="(comment , index) in allComment" :key="index" class="flex mb-4 pt-2 break-words">
               <img v-if="comment.commentator_profile != null" class="w-10 h-10 rounded-full me-4" :src="comment.commentator_profile" alt="user photo">
               <img v-else class="w-10 h-10 rounded-full me-4" src="@/assets/clown.jpg" alt="user photo">
              
-              <div :id="'commentId-' + comment.id" tabindex="0">
+              <div :id="'commentId-' + comment.id" tabindex="0" class=" w-5/6 ">
       
                 <a v-if="route.name === 'archive.album' && comment.commentator_username === route.params.username" :href="'/profile/' + comment.commentator_username" class=" font-semibold text-sm me-2">{{ comment.commentator_username }}</a>
                 <RouterLink v-else :to="'/profile/' + comment.commentator_username" class=" font-semibold text-sm me-2">{{ comment.commentator_username }}</RouterLink>
-                <pre class="comment ms-0 text-sm w-64">{{ comment.comment_text }}</pre>
+                <pre class="comment ms-0 text-sm">{{ comment.comment_text }}</pre>
                 <div v-if="route.name !== 'archive.album'" class="flex mt-1">
                   <span class="text-xs font-extralight me-4">{{ comment.created_at }}</span>
                   <span class="text-xs font-light cursor-pointer me-4" @click="subCommentToggle(comment.commentator_username , comment.id)">Balas</span>
@@ -55,14 +55,14 @@
                     
                   </span>
 
-                  <div v-if="showBalasan.indexOf(comment.id) !== -1" v-for="(subComment , index) in comment.sub_comments_list" :key="index" class="flex mb-4 pt-2">
+                  <div v-if="showBalasan.indexOf(comment.id) !== -1" v-for="(subComment , index) in comment.sub_comments_list" :key="index" class="flex mb-4 pt-2 break-words">
                     <img v-if="subComment.commentator_profile != null" class="w-10 h-10 rounded-full me-4" :src="subComment.commentator_profile" alt="user photo">
                     <img v-else class="w-10 h-10 rounded-full me-4" src="@/assets/clown.jpg" alt="user photo">
 
-                    <div :id="'subCommentId-' + subComment.id" tabindex="0">
+                    <div :id="'subCommentId-' + subComment.id" tabindex="0" class="w-5/6">
                       <a v-if="route.name === 'archive.album' && subComment.commentator_username === route.params.username" :href="'/profile/' + subComment.commentator_username" class=" font-semibold text-sm me-2">{{ subComment.commentator_username }}</a>
                          <RouterLink v-else :to="'/profile/' + subComment.commentator_username" class=" font-semibold text-sm me-2">{{ subComment.commentator_username }}</RouterLink>
-                      <pre class="comment text-sm w-56">{{ subComment.sub_comment_text }}</pre>
+                      <pre class="comment text-sm">{{ subComment.sub_comment_text }}</pre>
                       <div class="flex mt-1">
                         <span class="text-xs font-extralight me-4">{{ subComment.created_at }}</span>
                         <span v-if="route.name !== 'archive.profile'" class="text-xs font-light cursor-pointer me-4" @click="subCommentToggle(comment.commentator_username , comment.id)">Balas</span>
@@ -82,10 +82,10 @@
             
         </div>
        
-        <div id="footer-album" class="sticky bottom-0 bg-white z-20 border-t-2 h-[50px]">
+        <div id="footer-album" class="sticky bottom-0 z-20 border-t-2 bg-white rounded-b-lg h-[50px]">
             <form action="" @submit.prevent="handleComment">
             <label for="chat" class="sr-only">Your message</label>
-            <div class="flex items-center px-1 py-2 mt-4 rounded-lg">
+            <div class="flex items-center px-1 py-2  rounded-lg">
                 <textarea v-on:input="limitCharacterCount" v-if="route.name !== 'archive.album'" id="chat" rows="1" v-model="commentText.comment" name="comment" class="comment-box block me-1 p-2.5 w-full text-sm text-gray-900 bg-white rounded-lg border border-gray-300 focus:ring-blue-500 focus:border-blue-500 " placeholder="Silahkan komentar..."></textarea>
 
                 <textarea v-if="route.name === 'archive.album'" disabled id="chat" rows="1" class="block me-1 p-2.5 w-full text-sm text-gray-900 bg-white rounded-lg border border-gray-300 focus:ring-blue-500 focus:border-blue-500 " placeholder="Tidak dapat membuat komentar pada arsip..."></textarea>

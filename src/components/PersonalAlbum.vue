@@ -24,7 +24,7 @@
             <div class="flex mb-1 pt-2">
               <img v-if="foto_profile" class="w-10 h-10 rounded-full me-4" :src="foto_profile" alt="user photo">
               <img v-else class="w-10 h-10 rounded-full me-4" src="@/assets/clown.jpg" alt="user photo">
-              <div class="w-4/5">
+              <div class="w-3/5 break-words me-auto">
                 <span class=" font-semibold text-sm">{{ username }}</span> <br>
                 <span class="text-xs font-light">Post on {{ detailPost.created_at }}</span>
               </div>
@@ -63,12 +63,12 @@
     </div>
 
     <div class="w-1/2 hidden md:block">
-        <div v-if="images.length != 0" class="custom-scrollbar relative max-h-full overflow-scroll overflow-x-hidden px-2 box-border">
+        <div v-if="images.length != 0" class="custom-scrollbar relative max-h-full w-4/5 overflow-scroll overflow-x-hidden px-2 box-border">
          <div id="navbar-album" class="sticky top-0 bg-white h-auto z-10 border-b-2">
             <div class="flex mb-1 pt-2">
               <img v-if="foto_profile" class="w-10 h-10 rounded-full me-4" :src="foto_profile" alt="user photo">
               <img v-else class="w-10 h-10 rounded-full me-4" src="@/assets/clown.jpg" alt="user photo">
-              <div class="w-4/5">
+              <div class="w-3/5 break-words me-auto">
                 <span class=" font-semibold text-sm">{{ username }}</span> <br>
                 <span class="text-xs font-light">Post on {{ detailPost.created_at }}</span>
               </div>
@@ -80,26 +80,26 @@
          </div>
 
         <div id="caption-and-comment" class="mt-2 h-[500px] custom-scrollbar overflow-scroll overflow-x-hidden">
-          <div class="flex mb-4 pt-2">
+          <div class="flex mb-4 pt-2 break-words">
               <img v-if="foto_profile" class="w-10 h-10 rounded-full me-4" :src="foto_profile" alt="user photo">
               <img v-else class="w-10 h-10 rounded-full me-4" src="@/assets/clown.jpg" alt="user photo">
-              <div>
+              <div class="w-3/5">
                 <span class=" font-semibold text-sm me-2">{{ username }}</span>
-                <pre class="capt text-sm ">{{ detailPost.caption }}</pre>
+                <pre class="capt text-sm">{{ detailPost.caption }}</pre>
               </div>
             </div>
             
             <!-- Comments -->
             <div v-if="allComment.length != 0"> 
-              <div v-for="(comment , index) in allComment" :key="index" class="flex mb-4 pt-2">
+              <div v-for="(comment , index) in allComment" :key="index" class="flex mb-4 pt-2 break-words">
               <img v-if="comment.commentator_profile != null" class="w-10 h-10 rounded-full me-4" :src="comment.commentator_profile" alt="user photo">
               <img v-else class="w-10 h-10 rounded-full me-4" src="@/assets/clown.jpg" alt="user photo">
              
-              <div :id="'commentId-' + comment.id" tabindex="0">
+              <div :id="'commentId-' + comment.id" tabindex="0" class="w-3/5">
                 
                 <a v-if="route.name === 'archive.album' && comment.commentator_username === route.params.username" :href="'/profile/' + comment.commentator_username" class=" font-semibold text-sm me-2">{{ comment.commentator_username }}</a>
                 <RouterLink v-else :to="'/profile/' + comment.commentator_username" class=" font-semibold text-sm me-2">{{ comment.commentator_username }}</RouterLink>
-                <pre class="comment text-sm w-64">{{ comment.comment_text }}</pre>
+                <pre class="comment text-sm">{{ comment.comment_text }}</pre>
                 <div class="flex mt-1">
                   <span class="text-xs font-extralight me-4">{{ comment.created_at }}</span>
                   <span v-if="route.name !== 'archive.album'" class="text-xs font-light cursor-pointer me-4" @click="subCommentToggle(comment.commentator_username , comment.id)">Balas</span>
@@ -121,15 +121,15 @@
                     
                   </span>
 
-                  <div v-if="showBalasan.indexOf(comment.id) !== -1" v-for="(subComment , index) in comment.sub_comments_list" :key="index" class="flex mb-4 pt-2">
+                  <div v-if="showBalasan.indexOf(comment.id) !== -1" v-for="(subComment , index) in comment.sub_comments_list" :key="index" class="flex mb-4 pt-2 break-words">
                     <img v-if="subComment.commentator_profile != null" class="w-10 h-10 rounded-full me-4" :src="subComment.commentator_profile" alt="user photo">
                     <img v-else class="w-10 h-10 rounded-full me-4" src="@/assets/clown.jpg" alt="user photo">
 
-                    <div :id="'subCommentId-' + subComment.id" tabindex="0">
+                    <div :id="'subCommentId-' + subComment.id" tabindex="0" class="w-[82%]">
                       <a v-if="route.name === 'archive.album' && subComment.commentator_username === route.params.username" :href="'/profile/' + subComment.commentator_username" class=" font-semibold text-sm me-2">{{ subComment.commentator_username }}</a>
                        <RouterLink v-else :to="'/profile/' + subComment.commentator_username" class=" font-semibold text-sm me-2">{{ subComment.commentator_username }}</RouterLink>
 
-                      <pre class="comment text-sm w-56">{{ subComment.sub_comment_text }}</pre>
+                      <pre class="comment text-sm">{{ subComment.sub_comment_text }}</pre>
                       <div class="flex mt-1">
                         <span class="text-xs font-extralight me-4">{{ subComment.created_at }}</span>
                         <span v-if="route.name !== 'archive.album'" class="text-xs font-light cursor-pointer me-4" @click="subCommentToggle(comment.commentator_username , comment.id)">Balas</span>

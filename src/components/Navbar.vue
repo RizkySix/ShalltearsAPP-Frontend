@@ -19,11 +19,11 @@
           <span class="font-semibold ml-6 text-sm">Tampilkan semua...</span>
          </div>
           <div v-if="matchUser.length > 0 " v-for="(user , index) in matchUser" :key="index">
-            <div class="flex p-2">
+            <div class="flex break-words p-2">
                 <img v-if="user.foto_profile" :src="user.foto_profile" class="w-10 h-10 rounded-full" alt="Broken">
                 <img v-else src="@/assets/clown.jpg" class="w-10 h-10 rounded-full" alt="Broken">
-                <div class="ml-4">
-                    <RouterLink :to="'/profile/' + user.username" class="text-sm font-semibold">{{ user.username }}</RouterLink >
+                <div class="ml-4 w-8/12">
+                    <RouterLink :to="'/profile/' + user.username" class="text-sm font-semibold"><span>{{ user.username }}</span></RouterLink >
                     <p class="text-xs font-light">{{ user.first_name }} {{ user.last_name }}</p>
                 </div>
             </div>

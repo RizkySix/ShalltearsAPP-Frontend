@@ -8,7 +8,7 @@
    <div class=" grid grid-cols-3 md:grid-cols-3 gap-2 items-center justify-around p-4 flex-wrap">
       <img v-if="dataUser.foto_profile !== ''" class="md:mx-auto lg:w-32 lg:h-32 w-24 h-24 rounded-full shadow-lg" :src="dataUser.foto_profile" alt="Rusak"/>
       <img v-else class="md:mx-auto lg:w-32 lg:h-32 w-24 h-24 rounded-full shadow-lg" src="@/assets/clown.jpg" alt="Rusak"/>
-      <div class=" md:ms-12">
+      <div class="h-12 md:ms-12">
         <h5 class="text-base md:text-lg font-semibold text-gray-900 ">{{ dataUser.full_name }}</h5>
         <span class="text-xs md:text-sm text-gray-500 dark:text-gray-400 break-words">@{{ dataUser.username }}</span>
       </div>

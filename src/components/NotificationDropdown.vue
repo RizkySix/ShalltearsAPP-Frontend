@@ -19,7 +19,7 @@
                 alt="Foto Profil Default"
                 class="w-7 h-7 md:w-8 md:h-8 rounded-full"
                 />
-                <div class="ml-2">
+                <div class="ml-2 w-48 md:w-64 break-words">
                 <span
                     :class="{
                     'font-semibold text-[10px] md:text-xs': index <= userAuth.notification.total_notification - 1,

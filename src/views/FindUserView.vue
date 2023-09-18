@@ -15,10 +15,10 @@
 
        <div v-if="fetchProccess == true" class="list-scrollbar h-[500px] overflow-scroll overflow-x-hidden">
             <div class="h-auto">
-                <div v-if="matchUsers.length > 0" v-for="(user , index) in matchUsers" :key="index" id="lists" class="flex mb-3">
+                <div v-if="matchUsers.length > 0" v-for="(user , index) in matchUsers" :key="index" id="lists" class="flex mb-3 break-words">
                 <img class="w-14 h-14 md:w-16 md:h-16 rounded-full" v-if="user.foto_profile" :src="user.foto_profile" alt="Broken">
                 <img class="w-14 h-14 md:w-16 md:h-16 rounded-full" v-else src="@/assets/clown.jpg" alt="Broken">
-                <div class="ml-4">
+                <div class="ml-4 w-4/5">
                         <RouterLink :to="'/profile/' + user.username" class="text-base font-semibold">{{ user.username }}</RouterLink >
                         <p class="text-sm font-light">{{ user.first_name }} {{ user.last_name }}</p>
                     </div>

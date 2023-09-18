@@ -9,7 +9,7 @@
             <div v-for="(like , index) in likeList" :key="index" class="flex mb-1 pt-2">
               <img v-if="like.foto_profile != null" class="w-10 h-10 rounded-full me-4" :src="like.foto_profile" alt="user photo">
               <img v-else class="w-10 h-10 rounded-full me-4" src="@/assets/clown.jpg" alt="user photo">
-              <div class="w-4/5">
+              <div class="w-4/5 break-words">
                 <a v-if="route.name === 'archive.album' && like.username === route.params.username" :href="'/profile/' + like.username" class=" font-semibold text-sm me-2">{{ like.username }}</a>
                 <RouterLink v-else :to="'/profile/' + like.username" class=" font-semibold text-sm me-2">{{ like.username }}</RouterLink>
                 <p class="text-xs font-light">{{ like.first_name }}</p>

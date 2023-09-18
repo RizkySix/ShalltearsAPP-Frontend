@@ -45,7 +45,7 @@
               <img class=" w-12 h-12 rounded-full" v-if="content.user.foto_profile" :src="content.user.foto_profile" alt="Broken">
               <img class=" w-12 h-12 rounded-full" v-else src="@/assets/clown.jpg" alt="Broken">
               
-              <div class="w-4/5 ml-4">
+              <div class="w-4/5 ml-4 break-words">
                 <RouterLink :to="'/profile/' + content.user.username" class="font-semibold">{{ content.user.username }}</RouterLink> <br>
                 <span class="text-xs font-light">Post on {{ content.created_at }}</span>
               </div>
@@ -77,7 +77,7 @@
             <div class="flex mb-1 pt-2">
               <img class=" w-12 h-12 rounded-full" v-if="content.user.foto_profile" :src="content.user.foto_profile" alt="Broken">
               <img class=" w-12 h-12 rounded-full" v-else src="@/assets/clown.jpg" alt="Broken">
-                <div class="w-4/5 ml-4">
+                <div class="w-4/5 ml-4 break-words">
                   <RouterLink :to="'/profile/' + content.user.username" class=" font-semibold">{{ content.user.username }}</RouterLink> <br>
                   <span class="text-xs font-light">Post on {{ content.created_at }}</span>
                 </div>
@@ -112,13 +112,13 @@
                 </div>
                 <hr class="w-[300px] fixed">
                 <div class="" v-if="loginUser.length != 0 && waitingResponse == false">
-                    <div v-for="(user, index) in loginUser" :key="index" class="mt-4 mb-2 flex">
+                    <div v-for="(user, index) in loginUser" :key="index" class="mt-4 mb-2 flex break-words">
                     <div class="relative">
                         <img v-if="user.foto_profile" class="w-12 h-12 rounded-full" :src="user.foto_profile" :alt="user.username">
                         <img class="w-12 h-12 rounded-full" v-else src="@/assets/clown.jpg" alt="clown">
                         <span class="top-0 left-10 absolute  w-4 h-4 bg-green-400 border-2 border-white dark:border-gray-800 rounded-full"></span>
                     </div>
-                    <div class="ms-4">
+                    <div class="ms-4 w-3/6">
                         <RouterLink :to="'/profile/' + user.username" class="">
                             <span>{{ user.username }}</span>
                             <br>

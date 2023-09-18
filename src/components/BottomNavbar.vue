@@ -30,13 +30,13 @@
                 </div>
                 <hr>
                 <div v-if="loginUser.length != 0 && waitingResponse == false">
-                    <div v-for="(user, index) in loginUser" :key="index" class="mt-4 mb-2 flex">
+                    <div v-for="(user, index) in loginUser" :key="index" class="mt-4 mb-2 flex break-words">
                     <div class="relative">
                         <img class="w-14 h-14 rounded-full" :src="user.foto_profile" :alt="user.username" v-if="user.foto_profile">
                         <img class="w-14 h-14 rounded-full" v-else src="@/assets/clown.jpg" alt="clown">
                         <span class="top-0 left-10 absolute  w-4 h-4 bg-green-400 border-2 border-white rounded-full"></span>
                     </div>
-                    <div class="ms-4">
+                    <div class="ms-4 w-4/5">
                         <RouterLink @click="closeModal" :to="'/profile/' + user.username" class="">
                             <span>{{ user.username }}</span>
                             <br>

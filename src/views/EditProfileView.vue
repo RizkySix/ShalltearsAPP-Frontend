@@ -42,9 +42,9 @@
 
                   <form class="space-y-4 md:space-y-6" action="#" @submit.prevent="handleUpdateProfile">
                     <div class="flex items-center justify-between">
-                      <div class="items-start">
+                      <div class="items-start w-1/2 me-2">
                         <label for="first_name" class="block mb-2 text-sm font-medium text-gray-900 dark:text-white">Nama Depan</label>
-                          <input v-model="dataUser.first_name" type="text" name="first_name" id="first_name" class="bg-gray-50 border border-gray-300 text-gray-900 sm:text-sm rounded-lg focus:ring-blue-600 focus:border-blue-600 block lg:w-full md:w-full w-11/12 p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500" placeholder="Andika" required="">
+                          <input v-model="dataUser.first_name" type="text" name="first_name" id="first_name" class="bg-gray-50 border border-gray-300 text-gray-900 sm:text-sm rounded-lg focus:ring-blue-600 focus:border-blue-600 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500" placeholder="Andika" required="">
                           <div v-if="errorMsg.first_name != '' ">
                             <span class="text-red-400 text-sm">
                             {{ errorMsg.first_name }}
@@ -52,9 +52,9 @@
                         </div>
                       </div>
 
-                      <div class="items-start">
+                      <div class="items-start w-1/2">
                         <label for="last_name" class="block mb-2 text-sm font-medium text-gray-900 dark:text-white">Nama Belakang</label>
-                          <input v-model="dataUser.last_name" type="text" name="last_name" id="last_name" class="bg-gray-50 border border-gray-300 text-gray-900 sm:text-sm rounded-lg focus:ring-blue-600 focus:border-blue-600 block lg:w-full md:w-full w-11/12 p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500" placeholder="Machupicu" required="">
+                          <input v-model="dataUser.last_name" type="text" name="last_name" id="last_name" class="bg-gray-50 border border-gray-300 text-gray-900 sm:text-sm rounded-lg focus:ring-blue-600 focus:border-blue-600 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500" placeholder="Machupicu" required="">
                           <div v-if="errorMsg.last_name != '' ">
                             <span class="text-red-400 text-sm">
                             {{ errorMsg.last_name }}
@@ -65,7 +65,7 @@
                   </div>
                       <div>
                         <label for="username" class="block mb-2 text-sm font-medium text-gray-900 dark:text-white">Username</label>
-                          <input v-model="dataUser.username" type="text" name="username" id="username" class="bg-gray-50 border border-gray-300 text-gray-900 sm:text-sm rounded-lg focus:ring-blue-600 focus:border-blue-600 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500" placeholder="andika666" @input="validCharacter" required="">
+                          <input v-on:input="limitCharacterCountForUsername" v-model="dataUser.username" type="text" name="username" id="username" class="username bg-gray-50 border border-gray-300 text-gray-900 sm:text-sm rounded-lg focus:ring-blue-600 focus:border-blue-600 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500" placeholder="andika666" @input="validCharacter" required="">
                           <div v-if="errorMsg.username != '' ">
                             <span class="text-red-400 text-sm">
                             {{ errorMsg.username }}
@@ -138,6 +138,7 @@
   import { useUserAuthStore } from '@/stores/authUser'
   import axios from "axios";
 import http from "../helper/http";
+import { limitCharacterCountForUsername } from "../assets/js/limit-char-comment";
 
   const route = useRoute()
   const router = useRouter()
@@ -179,8 +180,8 @@ import http from "../helper/http";
   }
   
   /* Personal profile */
-    const toProfile = async () => {
-        await http().get('/api/v1/user/profile/' + route.params.username , {
+    const toProfile = () => {
+         http().get('/api/v1/user/profile/' + route.params.username , {
           headers: {
             Authorization: 'Bearer ' + localStorage.getItem('token')
           }
@@ -209,6 +210,7 @@ import http from "../helper/http";
 
     const handleUpdateProfile = () => {
       dataUser.address = document.getElementById('address').value
+      dataUser.username = dataUser.username.substring(0, 50);
         http().put('/api/v1/profile' , dataUser , {
             headers: {
             Authorization: 'Bearer ' + localStorage.getItem('token')
@@ -220,7 +222,17 @@ import http from "../helper/http";
             })
         })
         .catch((error) => {
-            console.error(error)
+               errorMsg.first_name = ''
+                errorMsg.last_name = ''
+                errorMsg.username = ''
+                errorMsg.bio = ''
+                errorMsg.password = ''
+                errorMsg.address = ''
+
+                const errorsBag = error.response.data.validation_errors
+                for (const field in errorsBag) {
+                    errorMsg[field] = errorsBag[field][0];
+                }
         })
     }
   
