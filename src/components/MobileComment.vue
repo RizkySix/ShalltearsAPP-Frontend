@@ -33,7 +33,7 @@
       
                 <a v-if="route.name === 'archive.album' && comment.commentator_username === route.params.username" :href="'/profile/' + comment.commentator_username" class=" font-semibold text-sm me-2">{{ comment.commentator_username }}</a>
                 <RouterLink v-else :to="'/profile/' + comment.commentator_username" class=" font-semibold text-sm me-2">{{ comment.commentator_username }}</RouterLink>
-                <pre class="comment text-sm">{{ comment.comment_text }}</pre>
+                <pre class="comment ms-0 text-sm w-64">{{ comment.comment_text }}</pre>
                 <div v-if="route.name !== 'archive.album'" class="flex mt-1">
                   <span class="text-xs font-extralight me-4">{{ comment.created_at }}</span>
                   <span class="text-xs font-light cursor-pointer me-4" @click="subCommentToggle(comment.commentator_username , comment.id)">Balas</span>
@@ -62,7 +62,7 @@
                     <div :id="'subCommentId-' + subComment.id" tabindex="0">
                       <a v-if="route.name === 'archive.album' && subComment.commentator_username === route.params.username" :href="'/profile/' + subComment.commentator_username" class=" font-semibold text-sm me-2">{{ subComment.commentator_username }}</a>
                          <RouterLink v-else :to="'/profile/' + subComment.commentator_username" class=" font-semibold text-sm me-2">{{ subComment.commentator_username }}</RouterLink>
-                      <pre class="comment text-sm">{{ subComment.sub_comment_text }}</pre>
+                      <pre class="comment text-sm w-56">{{ subComment.sub_comment_text }}</pre>
                       <div class="flex mt-1">
                         <span class="text-xs font-extralight me-4">{{ subComment.created_at }}</span>
                         <span v-if="route.name !== 'archive.profile'" class="text-xs font-light cursor-pointer me-4" @click="subCommentToggle(comment.commentator_username , comment.id)">Balas</span>

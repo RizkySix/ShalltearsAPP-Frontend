@@ -5,21 +5,21 @@
   
   <section v-if="isExist == 'fetched'" class="mb-24 lg:mb-12">
     <div class="w-full max-w-3xl m-auto bg-white border border-gray-200 rounded-lg shadow">
-   <div class="flex items-center justify-around p-4">
-      <img v-if="dataUser.foto_profile !== ''" class=" lg:w-32 lg:h-32 w-24 h-24 rounded-full shadow-lg" :src="dataUser.foto_profile" alt="Rusak"/>
-      <img v-else class=" lg:w-32 lg:h-32 w-24 h-24 rounded-full shadow-lg" src="@/assets/clown.jpg" alt="Rusak"/>
-      <div class="ms-4 lg:ms-0">
+   <div class=" grid grid-cols-3 md:grid-cols-3 gap-2 items-center justify-around p-4 flex-wrap">
+      <img v-if="dataUser.foto_profile !== ''" class="md:mx-auto lg:w-32 lg:h-32 w-24 h-24 rounded-full shadow-lg" :src="dataUser.foto_profile" alt="Rusak"/>
+      <img v-else class="md:mx-auto lg:w-32 lg:h-32 w-24 h-24 rounded-full shadow-lg" src="@/assets/clown.jpg" alt="Rusak"/>
+      <div class=" md:ms-12">
         <h5 class="text-base md:text-lg font-semibold text-gray-900 ">{{ dataUser.full_name }}</h5>
-        <span class="text-sm text-gray-500 dark:text-gray-400">@{{ dataUser.username }}</span>
+        <span class="text-xs md:text-sm text-gray-500 dark:text-gray-400 break-words">@{{ dataUser.username }}</span>
       </div>
-      <div class="flex justify-between">
+      <div class="flex  md:flex justify-center">
       <div class="me-4">
-        <span class="text-lg font-semibold text-gray-900 ">{{ dataUser.total_threads }}</span> <br>
-        <span class=" font-semibold text-gray-900 ">Threads</span>
+        <span class="text-base md:text-lg font-semibold text-gray-900 ">{{ dataUser.total_threads }}</span> <br>
+        <span class="text-sm md:text-base font-semibold text-gray-900 ">Threads</span>
       </div>
       <div>
-        <span class="text-lg  font-semibold text-gray-900 ">{{ dataUser.total_albums }}</span> <br>
-        <span class=" font-semibold text-gray-900 ">Albums</span>
+        <span class="text-base md:text-lg  font-semibold text-gray-900 ">{{ dataUser.total_albums }}</span> <br>
+        <span class="text-sm md:text-base font-semibold text-gray-900 ">Albums</span>
       </div>
     </div>
     </div>
