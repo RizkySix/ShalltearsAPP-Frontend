@@ -131,7 +131,8 @@
 </clipPath>
 </defs>
 </svg>
-        <h1 class="mb-4 text-4xl font-bold tracking-tight leading-none text-gray-900 lg:mb-6 md:text-5xl xl:text-6xl dark:text-white">Email Kamu Berhasil Diverifikasi</h1>
+        <h1 v-if="!route.query.fail" class="mb-4 text-4xl font-bold tracking-tight leading-none text-gray-900 lg:mb-6 md:text-5xl xl:text-6xl dark:text-white">Email Kamu Berhasil Diverifikasi</h1>
+        <h1 v-else class="mb-4 text-4xl font-bold tracking-tight leading-none text-red-400 lg:mb-6 md:text-5xl xl:text-6xl dark:text-red-400">Verifikasi Email Kedaluarsa</h1>
         <p class="font-light text-gray-500 md:text-lg xl:text-xl dark:text-gray-400">Silahkan close halaman ini salam dari rizky pangestu !!!</p>
     </div>
     
@@ -139,5 +140,7 @@
 </template>
 
 <script setup>
+import { useRoute } from 'vue-router';
 
+const route = useRoute()
 </script>

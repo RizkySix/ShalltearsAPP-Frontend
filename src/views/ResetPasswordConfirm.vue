@@ -136,8 +136,8 @@
             <p class="font-light text-gray-500 md:text-lg xl:text-xl dark:text-gray-400">Silahkan close halaman ini salam dari rizky pangestu !!!</p>
         </div>
 
-        <div v-else="result">
-            <h1 class="mb-4 text-2xl font-bold tracking-tight leading-none text-red-400 lg:mb-6 md:text-3xl xl:text-4xl dark:text-white">Token reset password tidak valid, silahkan reset kembali</h1>
+        <div v-else>
+            <h1 class="mb-4 text-2xl font-bold tracking-tight leading-none text-red-400 lg:mb-6 md:text-3xl xl:text-4xl dark:text-red-400">Token reset password tidak valid, silahkan reset kembali</h1>
             <p class="font-light text-gray-500 md:text-lg xl:text-xl dark:text-gray-400">Silahkan close halaman ini salam dari rizky pangestu !!!</p>
         </div>
     </div>
