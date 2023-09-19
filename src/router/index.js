@@ -71,9 +71,10 @@ const router = createRouter({
       } 
     },
     {
-      path: '/auth/verification/success',
+      path: '/auth/verification/:status',
       name: 'verification-success',
       component: VerificationSuccessView,
+      params: true,
       meta: {
         title: 'Shalltears-Verify Otp Confirm'
       } 

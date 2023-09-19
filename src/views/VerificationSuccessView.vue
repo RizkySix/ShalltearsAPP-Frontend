@@ -3,7 +3,7 @@
     <div class="py-8 px-4 mx-auto max-w-screen-md text-center lg:py-16 lg:px-12">
 
 <!-- Uploaded to: SVG Repo, www.svgrepo.com, Generator: SVG Repo Mixer Tools -->
-<svg class="m-auto w-[150px] h-[150px] md:w-[250px] md:h-[250px]" viewBox="0 0 246 246" fill="none" xmlns="http://www.w3.org/2000/svg">
+<svg v-if="route.params.status == 'success' || route.params.status == 'failed'" class="m-auto w-[150px] h-[150px] md:w-[250px] md:h-[250px]" viewBox="0 0 246 246" fill="none" xmlns="http://www.w3.org/2000/svg">
 <g clip-path="url(#clip0_397_2943)">
 <g filter="url(#filter0_iii_397_2943)">
 <path d="M0 115C0 51.4872 51.4873 0 115 0H127C192.722 0 246 53.2781 246 119V127C246 192.722 192.722 246 127 246H123C55.069 246 0 190.931 0 123V115Z" fill="url(#paint0_radial_397_2943)"/>
@@ -131,9 +131,17 @@
 </clipPath>
 </defs>
 </svg>
-        <h1 v-if="!route.query.fail" class="mb-4 text-4xl font-bold tracking-tight leading-none text-gray-900 lg:mb-6 md:text-5xl xl:text-6xl dark:text-white">Email Kamu Berhasil Diverifikasi</h1>
-        <h1 v-else class="mb-4 text-4xl font-bold tracking-tight leading-none text-red-400 lg:mb-6 md:text-5xl xl:text-6xl dark:text-red-400">Verifikasi Email Kedaluarsa</h1>
-        <p class="font-light text-gray-500 md:text-lg xl:text-xl dark:text-gray-400">Silahkan close halaman ini salam dari rizky pangestu !!!</p>
+       <div v-if="route.params.status == 'success'" >
+            <h1 class="mb-4 text-4xl font-bold tracking-tight leading-none text-gray-900 lg:mb-6 md:text-5xl xl:text-6xl dark:text-white">Email Kamu Berhasil Diverifikasi</h1>
+            <p class="font-light text-gray-500 md:text-lg xl:text-xl dark:text-gray-400">Silahkan close halaman ini salam dari rizky pangestu !!!</p>
+       </div>
+        <div v-else-if="route.params.status == 'failed'">
+            <h1 class="mb-4 text-4xl font-bold tracking-tight leading-none text-red-400 lg:mb-6 md:text-5xl xl:text-6xl dark:text-red-400">Verifikasi Email Kedaluarsa</h1>
+            <p class="font-light text-gray-500 md:text-lg xl:text-xl dark:text-gray-400">Silahkan close halaman ini salam dari rizky pangestu !!!</p>
+        </div>
+        <div v-else>
+            <NotFoundView />
+        </div>
     </div>
     
 </section>
@@ -141,6 +149,7 @@
 
 <script setup>
 import { useRoute } from 'vue-router';
+import NotFoundView from "@/components/NotFoundView.vue";
 
 const route = useRoute()
 </script>
