@@ -37,7 +37,9 @@
       </div>
 
        <div v-if="images.length != 0" class="max-h-full">
-         <Swipper :images="images" v-on:dblclick="likeCounterTap += 1 , likePost()"  />
+         <div v-on:dblclick="likeCounterTap += 1 , likePost()"  >
+          <Swipper :images="images" />
+         </div>
 
          <div id="footer-mobile" class="md:hidden">
           <div class="sticky bottom-0 bg-white h-auto rounded-b-lg p-4 z-10 border-t-2">
@@ -62,13 +64,13 @@
        </div>
     </div>
 
-    <div class="w-1/2 hidden md:block">
-        <div v-if="images.length != 0" class="custom-scrollbar relative max-h-full w-4/5 overflow-scroll overflow-x-hidden px-2 box-border">
-         <div id="navbar-album" class="sticky top-0 bg-white h-auto z-10 border-b-2">
+    <div class=" w-2/5 hidden md:block">
+        <div v-if="images.length != 0" class="custom-scrollbar relative max-h-full w-full overflow-scroll overflow-x-hidden px-2 box-border">
+         <div id="navbar-album" class="sticky top-0 bg-white h-auto z-10 border-b-2 ">
             <div class="flex mb-1 pt-2">
               <img v-if="foto_profile" class="w-10 h-10 rounded-full me-4" :src="foto_profile" alt="user photo">
               <img v-else class="w-10 h-10 rounded-full me-4" src="@/assets/clown.jpg" alt="user photo">
-              <div class="w-3/5 break-words me-auto">
+              <div class="w-9/12 break-words me-auto">
                 <span class=" font-semibold text-sm">{{ username }}</span> <br>
                 <span class="text-xs font-light">Post on {{ detailPost.created_at }}</span>
               </div>
@@ -83,7 +85,7 @@
           <div class="flex mb-4 pt-2 break-words">
               <img v-if="foto_profile" class="w-10 h-10 rounded-full me-4" :src="foto_profile" alt="user photo">
               <img v-else class="w-10 h-10 rounded-full me-4" src="@/assets/clown.jpg" alt="user photo">
-              <div class="w-3/5">
+              <div class="w-9/12">
                 <span class=" font-semibold text-sm me-2">{{ username }}</span>
                 <pre class="capt text-sm">{{ detailPost.caption }}</pre>
               </div>
@@ -95,7 +97,7 @@
               <img v-if="comment.commentator_profile != null" class="w-10 h-10 rounded-full me-4" :src="comment.commentator_profile" alt="user photo">
               <img v-else class="w-10 h-10 rounded-full me-4" src="@/assets/clown.jpg" alt="user photo">
              
-              <div :id="'commentId-' + comment.id" tabindex="0" class="w-3/5">
+              <div :id="'commentId-' + comment.id" tabindex="0" class="w-9/12">
                 
                 <a v-if="route.name === 'archive.album' && comment.commentator_username === route.params.username" :href="'/profile/' + comment.commentator_username" class=" font-semibold text-sm me-2">{{ comment.commentator_username }}</a>
                 <RouterLink v-else :to="'/profile/' + comment.commentator_username" class=" font-semibold text-sm me-2">{{ comment.commentator_username }}</RouterLink>

@@ -52,7 +52,7 @@
 </template>
 
 <script setup>
-import { ref  } from 'vue';
+import { ref, watch  } from 'vue';
 import axios from 'axios';
 
 import vueFilePond from 'vue-filepond';
@@ -91,13 +91,13 @@ const captDisabled = ref(true);
 
 const handleFilePondOnLoad = (response) => {
     myFiles.value.push(response)
-    myFiles.value.length == 0 ? captDisabled.value = true : captDisabled.value = false
+    
     return response
 }
 
 const handleFilePondRevert = (uniqueID , load) => {
     myFiles.value = myFiles.value.filter((image) => image !== uniqueID)
-    myFiles.value.length == 0 ? captDisabled.value = true : captDisabled.value = false
+    
     http().delete('/api/v1/temp/album' , {
         headers: {
          Authorization: 'Bearer ' + localStorage.getItem('token')
@@ -116,11 +116,12 @@ const handleFilePondRevert = (uniqueID , load) => {
 const onUpload = ref([])
 
 const onUploadAction = (error , file) => {
-    onUpload.value.push(file.serverId)
+    onUpload.value.push(file.serverId) //path gambar
 }
 
 
 const allUploaded = () => {
+    myFiles.value.length == 0 ? captDisabled.value = true : captDisabled.value = false
     http().put('/api/v1/temp/album' , {album_contents: onUpload.value} , {
         headers: {
          Authorization: 'Bearer ' + localStorage.getItem('token')
@@ -170,6 +171,12 @@ const handleCreateAlbum = () => {
     })
   
 }
+
+watch([() => myFiles.value.length] , ([currentLength] , [prevLength]) => {
+    if(currentLength < 1){
+        captDisabled.value = true
+    }
+})
 </script>
 
 <style scoped>

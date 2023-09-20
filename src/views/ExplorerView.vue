@@ -51,8 +51,8 @@
               </div>
             </div>
           
-            <div class="w-full mb-2">
-              <Swipper :images="content.album.contents" :explorer="true" v-on:dblclick="likeCounterTap += 1 , likePost(content.uuid)"  />
+            <div class="w-full mb-2" v-on:dblclick="likeCounterTap += 1 , likePost(content.uuid)"  >
+              <Swipper :images="content.album.contents" :explorer="true" />
             </div>
 
             <div class="flex pt-4 px-4">
