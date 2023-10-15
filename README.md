@@ -1,29 +1,25 @@
-# Frontend-ShalltearsApp
+# About Project
 
-This template should help get you started developing with Vue 3 in Vite.
+Ini adalah project Sosial Media untuk komunitas saya, Project ini dibuat dengan Vue js 3 untuk Frontendnya. Fitur-fitur yang disajikan dari project ini meliputi membuat postingan berupa album foto, membuat thread, memberi komentar, memberi like dan lain sebagainya. Untuk mencoba silahkan kunjungi tautan ini https://shalltears.vercel.app/
 
-## Recommended IDE Setup
+## How To Use
 
-[VSCode](https://code.visualstudio.com/) + [Volar](https://marketplace.visualstudio.com/items?itemName=Vue.volar) (and disable Vetur) + [TypeScript Vue Plugin (Volar)](https://marketplace.visualstudio.com/items?itemName=Vue.vscode-typescript-vue-plugin).
+- npm install
+- npm run dev
+- npm run build
 
-## Customize configuration
+## Built With
 
-See [Vite Configuration Reference](https://vitejs.dev/config/).
+- Vue js 3
+- Vite
+- Pinia state management
+- Vue router
+- Cropper js
+- Filepond/PQINA (upload file management)
+- Vue3 toastify
+- Swiper js
+- Vue google maps
+- Google maps api token
+- Tailwind css
+- Font awesome
 
-## Project Setup
-
-```sh
-npm install
-```
-
-### Compile and Hot-Reload for Development
-
-```sh
-npm run dev
-```
-
-### Compile and Minify for Production
-
-```sh
-npm run build
-```
